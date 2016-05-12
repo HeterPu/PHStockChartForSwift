@@ -8,6 +8,12 @@
 
 import UIKit
 
+/**
+ 十字线的类型
+ 
+ - PHShiZiStyleFenShiTu: 分时图十字线
+ - PHShiZiStyleLaZhuTu:  蜡烛图十字线
+ */
    enum PHShiZiStyle:Int  {
     case PHShiZiStyleFenShiTu = 1
     case PHShiZiStyleLaZhuTu
@@ -18,11 +24,14 @@ class ShiZiLayer: CALayer {
 
 
     var view_size:CGSize
+    /// 十字线的X值
     var xValue:CGFloat
+    /// 十字线的Y值
     var yValue:CGFloat
-    
+    /// 十字线类型
     var shiZiXian:PHShiZiStyle
     
+   /// 十字线的宽度
     var linewidth:CGFloat
     
     

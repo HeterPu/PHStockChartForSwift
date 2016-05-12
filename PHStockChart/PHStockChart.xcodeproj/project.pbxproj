@@ -13,13 +13,13 @@
 		D07437351CE44A2B0057DE2D /* macd.plist in Resources */ = {isa = PBXBuildFile; fileRef = D074372F1CE44A2B0057DE2D /* macd.plist */; };
 		D07437361CE44A2B0057DE2D /* vol.plist in Resources */ = {isa = PBXBuildFile; fileRef = D07437301CE44A2B0057DE2D /* vol.plist */; };
 		D07437371CE44A2B0057DE2D /* zhutu.plist in Resources */ = {isa = PBXBuildFile; fileRef = D07437311CE44A2B0057DE2D /* zhutu.plist */; };
+		D074373B1CE46F860057DE2D /* GuPiaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07437391CE46F860057DE2D /* GuPiaoView.swift */; };
+		D074373C1CE46F860057DE2D /* ShiZiLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D074373A1CE46F860057DE2D /* ShiZiLayer.swift */; };
 		D0904CA51CE2BF5500B58255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0904CA41CE2BF5500B58255 /* AppDelegate.swift */; };
 		D0904CA71CE2BF5500B58255 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0904CA61CE2BF5500B58255 /* ViewController.swift */; };
 		D0904CAA1CE2BF5500B58255 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0904CA81CE2BF5500B58255 /* Main.storyboard */; };
 		D0904CAC1CE2BF5500B58255 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0904CAB1CE2BF5500B58255 /* Assets.xcassets */; };
 		D0904CAF1CE2BF5500B58255 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0904CAD1CE2BF5500B58255 /* LaunchScreen.storyboard */; };
-		D0904CB91CE2C07F00B58255 /* ShiZiLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0904CB81CE2C07F00B58255 /* ShiZiLayer.swift */; };
-		D0904CE41CE3094000B58255 /* GuPiaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0904CE31CE3094000B58255 /* GuPiaoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +29,8 @@
 		D074372F1CE44A2B0057DE2D /* macd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = macd.plist; sourceTree = "<group>"; };
 		D07437301CE44A2B0057DE2D /* vol.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = vol.plist; sourceTree = "<group>"; };
 		D07437311CE44A2B0057DE2D /* zhutu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zhutu.plist; sourceTree = "<group>"; };
+		D07437391CE46F860057DE2D /* GuPiaoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuPiaoView.swift; sourceTree = "<group>"; };
+		D074373A1CE46F860057DE2D /* ShiZiLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiZiLayer.swift; sourceTree = "<group>"; };
 		D0904CA11CE2BF5400B58255 /* PHStockChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PHStockChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0904CA41CE2BF5500B58255 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0904CA61CE2BF5500B58255 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,8 +38,6 @@
 		D0904CAB1CE2BF5500B58255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0904CAE1CE2BF5500B58255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0904CB01CE2BF5500B58255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0904CB81CE2C07F00B58255 /* ShiZiLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiZiLayer.swift; sourceTree = "<group>"; };
-		D0904CE31CE3094000B58255 /* GuPiaoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuPiaoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D07437381CE46F860057DE2D /* PHStockChartClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D07437391CE46F860057DE2D /* GuPiaoView.swift */,
+				D074373A1CE46F860057DE2D /* ShiZiLayer.swift */,
+			);
+			path = PHStockChartClasses;
+			sourceTree = "<group>";
+		};
 		D0904C981CE2BF5400B58255 = {
 			isa = PBXGroup;
 			children = (
@@ -70,7 +79,7 @@
 		D0904CA31CE2BF5500B58255 /* PHStockChart */ = {
 			isa = PBXGroup;
 			children = (
-				D0904CB61CE2BFB400B58255 /* PHStockChartClasses */,
+				D07437381CE46F860057DE2D /* PHStockChartClasses */,
 				D0904CB71CE2BFB400B58255 /* resourses */,
 				D0904CA41CE2BF5500B58255 /* AppDelegate.swift */,
 				D0904CA61CE2BF5500B58255 /* ViewController.swift */,
@@ -80,15 +89,6 @@
 				D0904CB01CE2BF5500B58255 /* Info.plist */,
 			);
 			path = PHStockChart;
-			sourceTree = "<group>";
-		};
-		D0904CB61CE2BFB400B58255 /* PHStockChartClasses */ = {
-			isa = PBXGroup;
-			children = (
-				D0904CB81CE2C07F00B58255 /* ShiZiLayer.swift */,
-				D0904CE31CE3094000B58255 /* GuPiaoView.swift */,
-			);
-			path = PHStockChartClasses;
 			sourceTree = "<group>";
 		};
 		D0904CB71CE2BFB400B58255 /* resourses */ = {
@@ -181,10 +181,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0904CB91CE2C07F00B58255 /* ShiZiLayer.swift in Sources */,
 				D0904CA71CE2BF5500B58255 /* ViewController.swift in Sources */,
 				D0904CA51CE2BF5500B58255 /* AppDelegate.swift in Sources */,
-				D0904CE41CE3094000B58255 /* GuPiaoView.swift in Sources */,
+				D074373B1CE46F860057DE2D /* GuPiaoView.swift in Sources */,
+				D074373C1CE46F860057DE2D /* ShiZiLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
