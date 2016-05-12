@@ -104,7 +104,7 @@ class ViewController: UIViewController {
 
     }
     
-    
+
     
     func settudata() {
         gupiaoV?.setLabel()
