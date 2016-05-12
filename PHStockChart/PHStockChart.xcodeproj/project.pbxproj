@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D07437321CE44A2B0057DE2D /* dazhexian.plist in Resources */ = {isa = PBXBuildFile; fileRef = D074372C1CE44A2B0057DE2D /* dazhexian.plist */; };
+		D07437331CE44A2B0057DE2D /* kdj.plist in Resources */ = {isa = PBXBuildFile; fileRef = D074372D1CE44A2B0057DE2D /* kdj.plist */; };
+		D07437341CE44A2B0057DE2D /* lazhutu1.plist in Resources */ = {isa = PBXBuildFile; fileRef = D074372E1CE44A2B0057DE2D /* lazhutu1.plist */; };
+		D07437351CE44A2B0057DE2D /* macd.plist in Resources */ = {isa = PBXBuildFile; fileRef = D074372F1CE44A2B0057DE2D /* macd.plist */; };
+		D07437361CE44A2B0057DE2D /* vol.plist in Resources */ = {isa = PBXBuildFile; fileRef = D07437301CE44A2B0057DE2D /* vol.plist */; };
+		D07437371CE44A2B0057DE2D /* zhutu.plist in Resources */ = {isa = PBXBuildFile; fileRef = D07437311CE44A2B0057DE2D /* zhutu.plist */; };
 		D0904CA51CE2BF5500B58255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0904CA41CE2BF5500B58255 /* AppDelegate.swift */; };
 		D0904CA71CE2BF5500B58255 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0904CA61CE2BF5500B58255 /* ViewController.swift */; };
 		D0904CAA1CE2BF5500B58255 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0904CA81CE2BF5500B58255 /* Main.storyboard */; };
@@ -17,6 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D074372C1CE44A2B0057DE2D /* dazhexian.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dazhexian.plist; sourceTree = "<group>"; };
+		D074372D1CE44A2B0057DE2D /* kdj.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = kdj.plist; sourceTree = "<group>"; };
+		D074372E1CE44A2B0057DE2D /* lazhutu1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = lazhutu1.plist; sourceTree = "<group>"; };
+		D074372F1CE44A2B0057DE2D /* macd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = macd.plist; sourceTree = "<group>"; };
+		D07437301CE44A2B0057DE2D /* vol.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = vol.plist; sourceTree = "<group>"; };
+		D07437311CE44A2B0057DE2D /* zhutu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zhutu.plist; sourceTree = "<group>"; };
 		D0904CA11CE2BF5400B58255 /* PHStockChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PHStockChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0904CA41CE2BF5500B58255 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0904CA61CE2BF5500B58255 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +94,12 @@
 		D0904CB71CE2BFB400B58255 /* resourses */ = {
 			isa = PBXGroup;
 			children = (
+				D074372C1CE44A2B0057DE2D /* dazhexian.plist */,
+				D074372D1CE44A2B0057DE2D /* kdj.plist */,
+				D074372E1CE44A2B0057DE2D /* lazhutu1.plist */,
+				D074372F1CE44A2B0057DE2D /* macd.plist */,
+				D07437301CE44A2B0057DE2D /* vol.plist */,
+				D07437311CE44A2B0057DE2D /* zhutu.plist */,
 			);
 			path = resourses;
 			sourceTree = "<group>";
@@ -145,8 +163,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0904CAF1CE2BF5500B58255 /* LaunchScreen.storyboard in Resources */,
+				D07437371CE44A2B0057DE2D /* zhutu.plist in Resources */,
+				D07437321CE44A2B0057DE2D /* dazhexian.plist in Resources */,
+				D07437341CE44A2B0057DE2D /* lazhutu1.plist in Resources */,
 				D0904CAC1CE2BF5500B58255 /* Assets.xcassets in Resources */,
+				D07437361CE44A2B0057DE2D /* vol.plist in Resources */,
+				D07437351CE44A2B0057DE2D /* macd.plist in Resources */,
 				D0904CAA1CE2BF5500B58255 /* Main.storyboard in Resources */,
+				D07437331CE44A2B0057DE2D /* kdj.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +336,7 @@
 				D0904CB51CE2BF5500B58255 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
