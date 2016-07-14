@@ -22,8 +22,6 @@ import UIKit
 
 
 /**
- <#Description#>
- 
  - PHLaZhuTuSubstyleVOL:  交易量样式
  - PHLaZhuTuSubstyleMACD: MACD样式
  - PHLaZhuTuSubstyleKDJ:  KDJ样式  K ,D (0 - 100) J可以大于100，也可以小于0。
@@ -153,7 +151,7 @@ class GuPiaoView: UIView {
         style = chartstyle
 
         super.init(frame: frame)
-    }
+}
  
     
 // MARK: 重绘方法
@@ -307,7 +305,7 @@ class GuPiaoView: UIView {
     func setZuoShouAndZongLiang(zuoshouv:CGFloat,zongliang:NSString) {
         zuoShou = zuoshouv
         jyzl.text = zongliang as String
-    }
+}
     
     /**
      设置分时图数组
@@ -318,7 +316,7 @@ class GuPiaoView: UIView {
     func setFenShiDaZheAndXiaoZheArray(dazhe:NSArray,xiaozhe:NSArray) {
         daZhexData = dazhe
         xiaoZhexData = xiaozhe
-    }
+}
     
     
     /**
@@ -329,7 +327,7 @@ class GuPiaoView: UIView {
     func setFenShiZhuTuArray(zhutu:NSArray) {
         zhuData = zhutu
         self.transferFenShiData()
-    }
+}
     
     func transferFenShiData() {
         // find biggest offsetvalue
@@ -694,7 +692,6 @@ class GuPiaoView: UIView {
 }
     
     
-    
     /**
      DPO
      
@@ -704,7 +701,6 @@ class GuPiaoView: UIView {
         
         dpoArray = self.getLineArray(dpoarray)
 }
-    
     
     /**
      蜡烛图ASI
@@ -717,10 +713,7 @@ class GuPiaoView: UIView {
 }
     
     
-   
-    
 // MARK: 分时图绘图
-    
     
     func setFangKuang() {
         
@@ -815,7 +808,7 @@ class GuPiaoView: UIView {
     
      func setBiaoQian() {
         //left
-        zuigaoL.frame = CGRectMake( padding + 1, padding + 1, 50, 15)
+        zuigaoL.frame = CGRectMake(padding + 1, padding + 1, 50, 15)
         zuidiL.frame =  CGRectMake(padding + 1, padding + 4 * squareH - 15, 50, 15)
         jyzl.frame =  CGRectMake(padding + 1, 2 * padding + 4 * squareH , 50, 15)
         //right
@@ -831,7 +824,6 @@ class GuPiaoView: UIView {
             if (self.isShiZiXianShown == true) {
             shiZiLayer.frame = CGRectMake(0, 0, VIEW_SIZE.width, VIEW_SIZE.height)
             shiZiLayer.setNeedsDisplay()
-
     }
 }
     
@@ -1019,7 +1011,6 @@ class GuPiaoView: UIView {
             shiZiLayer.frame = CGRectMake(0, 0, VIEW_SIZE.width, VIEW_SIZE.height)
             shiZiLayer.setNeedsDisplay()
         }
-
 }
     
     
@@ -1439,7 +1430,7 @@ class GuPiaoView: UIView {
     
     
     
-    //绘制BOLLlllllllllllllll
+    //绘制BOLL
     func setBOLL() {
        
 }
@@ -1502,7 +1493,6 @@ class GuPiaoView: UIView {
             shiZiLayer.setNeedsDisplay()
         }
     }
-
 }
     
 

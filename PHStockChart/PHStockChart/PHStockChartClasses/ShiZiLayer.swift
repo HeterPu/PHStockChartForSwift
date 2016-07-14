@@ -44,7 +44,7 @@ class ShiZiLayer: CALayer {
         linewidth = 0.4
         
         super.init()
-    }
+}
 
     
 // MARK: 重绘制图形
@@ -58,7 +58,7 @@ class ShiZiLayer: CALayer {
         {
             self.styleLaZhuTu(ctx)
         }
-    }
+}
     
 // MARK: 重绘的具体样式
     
@@ -131,12 +131,12 @@ class ShiZiLayer: CALayer {
         CGContextMoveToPoint(ctx, xValue, y);
         CGContextAddLineToPoint(ctx, view_size.width - padding , y);
         CGContextStrokePath(ctx);
-    }
+}
     
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
+}
     
     
 
