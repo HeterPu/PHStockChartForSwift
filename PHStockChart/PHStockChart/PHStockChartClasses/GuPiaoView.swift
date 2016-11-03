@@ -15,8 +15,8 @@ import UIKit
  - PHChartStyleLaZhuTu:  绘制蜡烛图
  */
   enum PHChartstyle:Int {
-    case PHChartStyleFenShiTu = 1
-    case PHChartStyleLaZhuTu
+    case phChartStyleFenShiTu = 1
+    case phChartStyleLaZhuTu
 }
 
 
@@ -46,28 +46,28 @@ import UIKit
  - PHLaZhuTuSubstyleSAR:  SAR样式
  */
 enum PHLaZhuTuSubstyle:Int {
-    case PHLaZhuTuSubstyleVOL = 1
-    case PHLaZhuTuSubstyleMACD
-    case PHLaZhuTuSubstyleKDJ
-    case PHLaZhuTuSubstyleRSI
-    case PHLaZhuTuSubstyleBIAS
-    case PHLaZhuTuSubstyleDMA
-    case PHLaZhuTuSubstyleOBV
-    case PHLaZhuTuSubstyleROC
-    case PHLaZhuTuSubstyleMTM
-    case PHLaZhuTuSubstyleCR
-    case PHLaZhuTuSubstyleDMI
-    case PHLaZhuTuSubstyleBRAR
-    case PHLaZhuTuSubstyleVR
-    case PHLaZhuTuSubstyleTRIX
-    case PHLaZhuTuSubstyleEMV
-    case PHLaZhuTuSubstyleWR
-    case PHLaZhuTuSubstyleCCI
-    case PHLaZhuTuSubstylePSY
-    case PHLaZhuTuSubstyleDPO
-    case PHLaZhuTuSubstyleBOLL
-    case PHLaZhuTuSubstyleASI
-    case PHLaZhuTuSubstyleSAR
+    case phLaZhuTuSubstyleVOL = 1
+    case phLaZhuTuSubstyleMACD
+    case phLaZhuTuSubstyleKDJ
+    case phLaZhuTuSubstyleRSI
+    case phLaZhuTuSubstyleBIAS
+    case phLaZhuTuSubstyleDMA
+    case phLaZhuTuSubstyleOBV
+    case phLaZhuTuSubstyleROC
+    case phLaZhuTuSubstyleMTM
+    case phLaZhuTuSubstyleCR
+    case phLaZhuTuSubstyleDMI
+    case phLaZhuTuSubstyleBRAR
+    case phLaZhuTuSubstyleVR
+    case phLaZhuTuSubstyleTRIX
+    case phLaZhuTuSubstyleEMV
+    case phLaZhuTuSubstyleWR
+    case phLaZhuTuSubstyleCCI
+    case phLaZhuTuSubstylePSY
+    case phLaZhuTuSubstyleDPO
+    case phLaZhuTuSubstyleBOLL
+    case phLaZhuTuSubstyleASI
+    case phLaZhuTuSubstyleSAR
 }
 
 
@@ -79,11 +79,11 @@ class GuPiaoView: UIView {
     /// 图表样式
     var style:PHChartstyle
     /// 蜡烛图子视图属性
-    var subStyle:PHLaZhuTuSubstyle = .PHLaZhuTuSubstyleVOL
+    var subStyle:PHLaZhuTuSubstyle = .phLaZhuTuSubstyleVOL
     
 // MARK: 宏变量
    
-    var VIEW_SIZE:CGSize = CGSizeZero
+    var VIEW_SIZE:CGSize = CGSize.zero
     var padding:CGFloat = 5
     var buttompadding:CGFloat = 20
     var squareH:CGFloat = 0
@@ -92,13 +92,13 @@ class GuPiaoView: UIView {
 
 // MARK: 分时图属性
     
-    var daZhexData = NSArray()
-    var xiaoZhexData = NSArray()
-    var zhuData = NSArray()
+    var daZhexData = Array<AnyObject>()
+    var xiaoZhexData = Array<AnyObject>()
+    var zhuData = Array<AnyObject>()
     
-    var fenShiVol = NSArray()
-    var fenShiDaZhe = NSArray()
-    var fenShiXiaoZhe = NSArray()
+    var fenShiVol = Array<Array<AnyObject>>()
+    var fenShiDaZhe = Array<AnyObject>()
+    var fenShiXiaoZhe = Array<AnyObject>()
     
     var zuoShou:CGFloat = 0
     
@@ -116,7 +116,7 @@ class GuPiaoView: UIView {
 // MARK: 蜡烛图属性
     
     var laZhuTuTransArray = NSArray()
-    var volArray = NSArray()
+    var volArray = Array<Array<AnyObject>>()
     var macdArray = NSArray()
     var kdjArray = NSArray()
     var rsiArray = NSArray()
@@ -161,9 +161,9 @@ class GuPiaoView: UIView {
      
      - parameter rect: 尺寸的大小
      */
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
        
-        if(style == .PHChartStyleFenShiTu){
+        if(style == .phChartStyleFenShiTu){
             
             self.setFangKuang()
             self.setBiaoQian()
@@ -176,47 +176,47 @@ class GuPiaoView: UIView {
             self.setLaZhuTu()
             
             switch(subStyle){
-            case .PHLaZhuTuSubstyleVOL:
+            case .phLaZhuTuSubstyleVOL:
                 self.setVol2()
-            case  .PHLaZhuTuSubstyleMACD:
+            case  .phLaZhuTuSubstyleMACD:
                 self.setMACD()
-            case .PHLaZhuTuSubstyleKDJ:
+            case .phLaZhuTuSubstyleKDJ:
                 self.setKDJ()
-            case .PHLaZhuTuSubstyleRSI:
+            case .phLaZhuTuSubstyleRSI:
                 self.setRSI()
-            case .PHLaZhuTuSubstyleBIAS:
+            case .phLaZhuTuSubstyleBIAS:
                 self.setBIAS()
-            case .PHLaZhuTuSubstyleDMA:
+            case .phLaZhuTuSubstyleDMA:
                 self.setDMA()
-            case .PHLaZhuTuSubstyleOBV:
+            case .phLaZhuTuSubstyleOBV:
                 self.setOBV()
-            case .PHLaZhuTuSubstyleROC:
+            case .phLaZhuTuSubstyleROC:
                 self.setROC()
-            case .PHLaZhuTuSubstyleMTM:
+            case .phLaZhuTuSubstyleMTM:
                 self.setMTM()
-            case .PHLaZhuTuSubstyleCR:
+            case .phLaZhuTuSubstyleCR:
                 self.setCR()
-            case .PHLaZhuTuSubstyleDMI:
+            case .phLaZhuTuSubstyleDMI:
                 self.setDMI()
-            case .PHLaZhuTuSubstyleBRAR:
+            case .phLaZhuTuSubstyleBRAR:
                 self.setBRAR()
-            case .PHLaZhuTuSubstyleVR:
+            case .phLaZhuTuSubstyleVR:
                 self.setVR()
-            case .PHLaZhuTuSubstyleTRIX:
+            case .phLaZhuTuSubstyleTRIX:
                 self.setTRIX()
-            case .PHLaZhuTuSubstyleEMV:
+            case .phLaZhuTuSubstyleEMV:
                 self.setEMV()
-            case .PHLaZhuTuSubstyleWR:
+            case .phLaZhuTuSubstyleWR:
                 self.setWR()
-            case .PHLaZhuTuSubstyleCCI:
+            case .phLaZhuTuSubstyleCCI:
                 self.setCCI()
-            case .PHLaZhuTuSubstylePSY:
+            case .phLaZhuTuSubstylePSY:
                 self.setPSY()
-            case .PHLaZhuTuSubstyleDPO:
+            case .phLaZhuTuSubstyleDPO:
                 self.setDPO()
-            case .PHLaZhuTuSubstyleBOLL:
+            case .phLaZhuTuSubstyleBOLL:
                 self.setBOLL()
-            case .PHLaZhuTuSubstyleASI:
+            case .phLaZhuTuSubstyleASI:
                 self.setASI()
             default:
                 self.setSAR()
@@ -239,49 +239,52 @@ class GuPiaoView: UIView {
         
         let color:UIColor = self.setColor(166, g: 166, b: 166, a: 1)
         //left
-        zuigaoL.font = UIFont.systemFontOfSize(8.0)
+        zuigaoL.font = UIFont.systemFont(ofSize: 8.0)
         zuigaoL.textColor = color
-        zuidiL.font = UIFont.systemFontOfSize(8.0)
+        zuidiL.font = UIFont.systemFont(ofSize: 8.0)
         zuidiL.textColor = color
         
-        jyzl.font = UIFont.systemFontOfSize(8.0)
+        jyzl.font = UIFont.systemFont(ofSize: 8.0)
         jyzl.textColor = color
         //right
-        zuigaoB.textAlignment = NSTextAlignment.Right
-        zuigaoB.font = UIFont.systemFontOfSize(8.0)
+        zuigaoB.textAlignment = NSTextAlignment.right
+        zuigaoB.font = UIFont.systemFont(ofSize: 8.0)
         zuigaoB.textColor = color
-        zuidiB.textAlignment = NSTextAlignment.Right;
-        zuidiB.font = UIFont.systemFontOfSize(8.0)
+        zuidiB.textAlignment = NSTextAlignment.right;
+        zuidiB.font = UIFont.systemFont(ofSize: 8.0)
         zuidiB.textColor = color
         //shijian
         shijian1.text = "09.30"
-        shijian1.textAlignment = NSTextAlignment.Left;
-        shijian1.font = UIFont.systemFontOfSize(7.0)
+        shijian1.textAlignment = NSTextAlignment.left;
+        shijian1.font = UIFont.systemFont(ofSize: 7.0)
         shijian1.textColor = color
         
         shijian2.text = "10.30"
-        shijian2.textAlignment = NSTextAlignment.Center
-        shijian2.font = UIFont.systemFontOfSize(7.0)
+        shijian2.textAlignment = NSTextAlignment.center
+        shijian2.font = UIFont.systemFont(ofSize: 7.0)
         shijian2.textColor = color
         
         shijian3.text = "11.30/13:00"
-        shijian3.textAlignment = NSTextAlignment.Center
-        shijian3.font = UIFont.systemFontOfSize(7.0)
+        shijian3.textAlignment = NSTextAlignment.center
+        shijian3.font = UIFont.systemFont(ofSize: 7.0)
         shijian3.textColor = color
         
         shijian4.text = "14:00"
-        shijian4.textAlignment = NSTextAlignment.Center
-        shijian4.font = UIFont.systemFontOfSize(7.0)
+        shijian4.textAlignment = NSTextAlignment.center
+        shijian4.font = UIFont.systemFont(ofSize: 7.0)
         shijian4.textColor = color
         
         shijian5.text = "15:00"
-        shijian5.textAlignment = NSTextAlignment.Right
-        shijian5.font = UIFont.systemFontOfSize(7.0)
+        shijian5.textAlignment = NSTextAlignment.right
+        shijian5.font = UIFont.systemFont(ofSize: 7.0)
         shijian5.textColor = color
         
-        self.layer.addSublayer(shiZiLayer)
-        shiZiLayer.hidden = true
-        shiZiLayer.shiZiXian = .PHShiZiStyleFenShiTu
+        
+        if (isShiZiXianShown) {
+        shiZiLayer.isHidden = true
+        shiZiLayer.frame = CGRect(x: 0, y: 0, width: VIEW_SIZE.width, height: VIEW_SIZE.height)
+        shiZiLayer.shiZiXian = .phShiZiStyleFenShiTu
+    }
    
         self.addSubview(zuigaoL)
         self.addSubview(zuidiL)
@@ -302,7 +305,7 @@ class GuPiaoView: UIView {
      - parameter zuoshouv:  昨收
      - parameter zongliang: 总量
      */
-    func setZuoShouAndZongLiang(zuoshouv:CGFloat,zongliang:NSString) {
+    func setZuoShouAndZongLiang(_ zuoshouv:CGFloat,zongliang:NSString) {
         zuoShou = zuoshouv
         jyzl.text = zongliang as String
 }
@@ -313,21 +316,13 @@ class GuPiaoView: UIView {
      - parameter dazhe:   大折线数组
      - parameter xiaozhe: 小折线数组
      */
-    func setFenShiDaZheAndXiaoZheArray(dazhe:NSArray,xiaozhe:NSArray) {
-        daZhexData = dazhe
-        xiaoZhexData = xiaozhe
-}
+    func setFenShiDaZheAndXiaoZheArray(_ dazhe:NSArray,xiaozhe:NSArray, zhutu:NSArray) {
+        daZhexData = dazhe as Array<AnyObject>
+        xiaoZhexData = xiaozhe as Array<AnyObject>
+        zhuData = zhutu as Array<AnyObject>
+        transferFenShiData()
+   }
     
-    
-    /**
-     设置分时柱图数组
-     
-     - parameter zhutu: 柱图数组
-     */
-    func setFenShiZhuTuArray(zhutu:NSArray) {
-        zhuData = zhutu
-        self.transferFenShiData()
-}
     
     func transferFenShiData() {
         // find biggest offsetvalue
@@ -343,36 +338,40 @@ class GuPiaoView: UIView {
         let high = zuoShou + maxOffSetValue
         let low  = zuoShou - maxOffSetValue
         // set fenshidazhexian array
-        let dazhe = NSMutableArray()
+        var dazhe = Array<AnyObject>()
         for element in daZhexData  {
             let temptfloat = (element as! CGFloat - low)/(2 * maxOffSetValue);
-            dazhe.addObject(temptfloat)
+            dazhe.append(temptfloat as AnyObject)
         }
         fenShiDaZhe = dazhe
         // set fenshixiaozhexian array
-        let xiaozhe = NSMutableArray()
+        var xiaozhe = Array<AnyObject>()
         for element in  xiaoZhexData {
             let temptfloat = (element as! CGFloat - low)/(2 * maxOffSetValue);
-            xiaozhe.addObject(temptfloat)
+            xiaozhe.append(temptfloat as AnyObject)
         }
         fenShiXiaoZhe = xiaozhe
         //转换分时图成交量数据
-        let temptarra = NSMutableArray()
+        
+        
         var _max_NUM = zhuData[0][1] as! CGFloat
         
         for  element in  zhuData {
-            let number = element[1] as! CGFloat
+            let Element = element as!NSArray
+            let number = Element[1] as! CGFloat
             if (_max_NUM < number){ _max_NUM = number }
             }
         
+        
+        var temptarra = Array<Array<AnyObject>>()
+        
         for element in  zhuData  {
-    
-            let tempt = NSMutableArray()
+            var tempt = Array<AnyObject>()
             let temptNumber1 = element[0] as! CGFloat
             let temptNumber2 = element[1] as! CGFloat / _max_NUM
-            tempt.addObject(temptNumber1)
-            tempt.addObject(temptNumber2)
-            temptarra.addObject(tempt)
+            tempt.append(temptNumber1 as AnyObject)
+            tempt.append(temptNumber2 as AnyObject)
+            temptarra.append(tempt)
         }
             fenShiVol = temptarra
         //setlabel
@@ -390,22 +389,26 @@ class GuPiaoView: UIView {
      
      - parameter lztarray: 蜡烛图数组
      */
-    func setLZTarray(lztarray:NSArray) {
+    func setLZTarray(_ lztarray:NSArray) {
         
         VIEW_SIZE = self.bounds.size
         squareH = (VIEW_SIZE.height - 2 * padding - buttompadding) / 6
         squareW = (VIEW_SIZE.width - 2 * padding) / 4
         squareH1 =  (VIEW_SIZE.height - 3 * padding - buttompadding) / 5
         
-        shiZiLayer.hidden = true
-        shiZiLayer.shiZiXian = .PHShiZiStyleLaZhuTu
-
-        var _max_NUM =  lztarray[0][0] as! CGFloat
-        var _min_NUM =  lztarray[0][0] as! CGFloat
+        shiZiLayer.isHidden = true
+        shiZiLayer.shiZiXian = .phShiZiStyleLaZhuTu
+        self.layer.addSublayer(shiZiLayer)
+        
+        
+        let laztArray = lztarray as![NSArray]
+        var _max_NUM =  laztArray[0][0] as! CGFloat
+        var _min_NUM =  laztArray[0][0] as! CGFloat
         
         for element in  lztarray {
             for  i in 0 ..< 7 {
-               let num = element[i] as! CGFloat
+               let Element=element as! NSArray
+               let num = Element[i] as! CGFloat
                 if (_max_NUM < num){ _max_NUM = num }
                 if (_min_NUM > num){ _min_NUM = num }
             }
@@ -416,10 +419,11 @@ class GuPiaoView: UIView {
         for element in  lztarray {
             let tempt = NSMutableArray()
             for  i in 0 ..< 7 {
-               let temptNumber = (element[i] as! CGFloat - _min_NUM) / _max_NUM
-                tempt.addObject(temptNumber)
+               let Element=element as! NSArray
+               let temptNumber = (Element[i] as! CGFloat - _min_NUM) / _max_NUM
+                tempt.add(temptNumber)
             }
-            temptarra.addObject(tempt)
+            temptarra.add(tempt)
        }
         laZhuTuTransArray = temptarra
   }
@@ -430,25 +434,28 @@ class GuPiaoView: UIView {
      
      - parameter volarray: 成交量
      */
-    func setVol(volarray:NSArray) {
+    func setVol(_ volarray:NSArray) {
         
-        let temptarra = NSMutableArray()
-        var _max_NUM = volarray[0][1] as! CGFloat
-        
+        var temptarra = Array<Array<AnyObject>>()
+        let volArrayT = volarray as Array<AnyObject>
+        var _max_NUM = volArrayT[0][1] as! CGFloat
             for element in  volarray {
-            let value1 = element[0] as! CGFloat
-            let value2 = element[1] as! CGFloat
+            let Element = element as! NSArray
+            let value1 = Element[0] as! CGFloat
+            let value2 = Element[1] as! CGFloat
                 if (_max_NUM < value1){ _max_NUM = value1 }
                 if (_max_NUM < value2){ _max_NUM = value2 }
         }
     
-        for element in  volarray {
-            let tempt = NSMutableArray();
+        for element in  volArrayT {
+            
+            
+            var tempt = Array<AnyObject>()
             let temptNumber1 = element[0] as! CGFloat
-            let temptNumber2 = element[0] as! CGFloat  / _max_NUM
-            tempt.addObject(temptNumber1)
-            tempt.addObject(temptNumber2)
-            temptarra.addObject(tempt)
+            let temptNumber2 = element[1] as! CGFloat / _max_NUM
+            tempt.append(temptNumber1 as AnyObject)
+            tempt.append(temptNumber2 as AnyObject)
+            temptarra.append(tempt)
         }
         volArray = temptarra
 }
@@ -458,11 +465,12 @@ class GuPiaoView: UIView {
      
      - parameter macdarray: MACD
      */
-    func setMACD(macdarray:NSArray) {
+    func setMACD(_ macdarray:NSArray) {
         var _max_NUM:CGFloat = 0
         for element in macdarray {
-            let ema12 = element[0] as! CGFloat
-            let ema26 = element[1] as! CGFloat
+            let Element = element as! NSArray
+            let ema12 = Element[0] as! CGFloat
+            let ema26 = Element[1] as! CGFloat
             let dif = ema12 - ema26
             
             if (_max_NUM < self.getAbosoluteValue(ema12)){ _max_NUM = self.getAbosoluteValue(ema12)}
@@ -472,13 +480,14 @@ class GuPiaoView: UIView {
         let temptarra = NSMutableArray()
         for element in macdarray {
             let temptarray = NSMutableArray()
-            let ema12 = (element[0] as! CGFloat) / (_max_NUM * 1.1)
-            let ema26 = (element[1] as! CGFloat) / (_max_NUM * 1.1)
+            let Element = element as! NSArray
+            let ema12 = (Element[0] as! CGFloat) / (_max_NUM * 1.1)
+            let ema26 = (Element[1] as! CGFloat) / (_max_NUM * 1.1)
             let delta = (ema12 - ema26) * 2
-            temptarray.addObject(ema12)
-            temptarray.addObject(ema26)
-            temptarray.addObject(delta)
-            temptarra.addObject(temptarray)
+            temptarray.add(ema12)
+            temptarray.add(ema26)
+            temptarray.add(delta)
+            temptarra.add(temptarray)
         }
          macdArray = temptarra
 }
@@ -489,7 +498,7 @@ class GuPiaoView: UIView {
      
      - parameter kdjarray: KDJ
      */
-    func setKDJ(kdjarray:NSArray) {
+    func setKDJ(_ kdjarray:NSArray) {
         
         kdjArray = self.getLineArray(kdjarray)
 }
@@ -499,7 +508,7 @@ class GuPiaoView: UIView {
      
      - parameter rsiarray: RSI
      */
-    func setRSI(rsiarray:NSArray) {
+    func setRSI(_ rsiarray:NSArray) {
         
         rsiArray = self.getLineArray(rsiarray)
 }
@@ -509,7 +518,7 @@ class GuPiaoView: UIView {
      
      - parameter biasarray: BIAS
      */
-    func setBIAS(biasarray:NSArray) {
+    func setBIAS(_ biasarray:NSArray) {
         
         biasArray = self.getLineArray(biasarray)
 }
@@ -520,7 +529,7 @@ class GuPiaoView: UIView {
      
      - parameter dmaarray: DMA
      */
-    func setDMA(dmaarray:NSArray) {
+    func setDMA(_ dmaarray:NSArray) {
         
         dmaArray = self.getLineArray(dmaarray)
 }
@@ -531,7 +540,7 @@ class GuPiaoView: UIView {
      
      - parameter obvarray: OBV
      */
-    func setOBV(obvarray:NSArray) {
+    func setOBV(_ obvarray:NSArray) {
         
         obvArray = self.getLineArray(obvarray)
 }
@@ -543,7 +552,7 @@ class GuPiaoView: UIView {
      
      - parameter rocarray: ROC
      */
-    func setROC(rocarray:NSArray) {
+    func setROC(_ rocarray:NSArray) {
         
         rocArray = self.getLineArray(rocarray)
 }
@@ -555,14 +564,16 @@ class GuPiaoView: UIView {
      
      - parameter mtmarray: MTM
      */
-    func setMTM(mtmarray:NSArray) {
+    func setMTM(_ mtmarray:NSArray) {
         
-        var  _MAX_NUM = mtmarray[0][0] as! CGFloat
-        var  _MIN_NUM = mtmarray[0][0] as! CGFloat
+        let mtmaarrayT = mtmarray as![NSArray]
+        var  _MAX_NUM = mtmaarrayT[0][0] as! CGFloat
+        var  _MIN_NUM = mtmaarrayT[0][0] as! CGFloat
         
         for element in mtmarray {
-            let MTM1value = element[0] as! CGFloat
-            let MTM2value = element[1] as! CGFloat
+            let Element = element as! NSArray
+            let MTM1value = Element[0] as! CGFloat
+            let MTM2value = Element[1] as! CGFloat
             if (_MAX_NUM < MTM1value ){ _MAX_NUM = MTM1value }
             if (_MAX_NUM < MTM2value ){ _MAX_NUM = MTM2value }
             if (_MIN_NUM > MTM1value ){ _MIN_NUM = MTM1value }
@@ -572,11 +583,12 @@ class GuPiaoView: UIView {
         let temptarra = NSMutableArray()
         for element in mtmarray {
             let  temptarray = NSMutableArray()
-            let mtm1newvalue = (element[0] as! CGFloat - _MIN_NUM) / delta
-            let mtm2newvalue = (element[1] as! CGFloat - _MIN_NUM) / delta
-            temptarray.addObject(mtm1newvalue)
-            temptarray.addObject(mtm2newvalue)
-            temptarra.addObject(temptarray)
+            let Element = element as! NSArray
+            let mtm1newvalue = (Element[0] as! CGFloat - _MIN_NUM) / delta
+            let mtm2newvalue = (Element[1] as! CGFloat - _MIN_NUM) / delta
+            temptarray.add(mtm1newvalue)
+            temptarray.add(mtm2newvalue)
+            temptarra.add(temptarray)
         }
         mtmArray = temptarra
 }
@@ -587,7 +599,7 @@ class GuPiaoView: UIView {
      
      - parameter crarray: CRA
      */
-    func setCR(crarray:NSArray) {
+    func setCR(_ crarray:NSArray) {
         
         crArray = self.getLineArray(crarray)
     }
@@ -598,7 +610,7 @@ class GuPiaoView: UIView {
      
      - parameter dmiarray: DMI
      */
-    func setDMI(dmiarray:NSArray) {
+    func setDMI(_ dmiarray:NSArray) {
         
         dmiArray = self.getLineArray(dmiarray)
     }
@@ -608,14 +620,16 @@ class GuPiaoView: UIView {
      
      - parameter brararray: BRAR
      */
-    func setBRAR(brararray:NSArray) {
+    func setBRAR(_ brararray:NSArray) {
         
-        var _MAX_NUM = brararray[0][0] as! CGFloat
-        var _MIN_NUM = brararray[0][0] as! CGFloat
+        let brararrayT = brararray as![NSArray]
+        var _MAX_NUM = brararrayT[0][0] as! CGFloat
+        var _MIN_NUM = brararrayT[0][0] as! CGFloat
         
         for element in brararray {
-            let brar1value = element[0] as! CGFloat
-            let brar2value = element[1] as! CGFloat
+            let Element = element as!NSArray
+            let brar1value = Element[0] as! CGFloat
+            let brar2value = Element[1] as! CGFloat
             if (_MAX_NUM < brar1value ){ _MAX_NUM = brar1value }
             if (_MAX_NUM < brar2value ){ _MAX_NUM = brar2value }
             if (_MIN_NUM > brar1value ){ _MIN_NUM = brar1value }
@@ -625,11 +639,12 @@ class GuPiaoView: UIView {
         let temptarra = NSMutableArray()
         for element in brararray {
             let temptarray = NSMutableArray()
-            let brar1newvalue = (element[0] as! CGFloat - _MIN_NUM) / delta
-            let brar2newvalue = (element[1] as! CGFloat - _MIN_NUM) / delta
-            temptarray.addObject(brar1newvalue)
-            temptarray.addObject(brar2newvalue)
-            temptarra.addObject(temptarray)
+            let Element = element as!NSArray
+            let brar1newvalue = (Element[0] as! CGFloat - _MIN_NUM) / delta
+            let brar2newvalue = (Element[1] as! CGFloat - _MIN_NUM) / delta
+            temptarray.add(brar1newvalue)
+            temptarray.add(brar2newvalue)
+            temptarra.add(temptarray)
         }
         brarArray = temptarra
 }
@@ -640,7 +655,7 @@ class GuPiaoView: UIView {
      
      - parameter vrarray: VR
      */
-    func setVR(vrarray:NSArray) {
+    func setVR(_ vrarray:NSArray) {
         
         vrArray = self.getLineArray(vrarray)
 }
@@ -651,7 +666,7 @@ class GuPiaoView: UIView {
      
      - parameter trixarray: TRIX
      */
-    func setTRIX(trixarray:NSArray) {
+    func setTRIX(_ trixarray:NSArray) {
         
         trixArray = self.getLineArray(trixarray)
 }
@@ -662,7 +677,7 @@ class GuPiaoView: UIView {
      
      - parameter emvarray: EMV
      */
-    func setEMV(emvarray:NSArray) {
+    func setEMV(_ emvarray:NSArray) {
         
         emvArray = self.getLineArray(emvarray)
 }
@@ -674,7 +689,7 @@ class GuPiaoView: UIView {
      
      - parameter wrarray: WR
      */
-    func setWR(wrarray:NSArray) {
+    func setWR(_ wrarray:NSArray) {
         
         wrArray = self.getLineArray(wrarray)
 }
@@ -686,7 +701,7 @@ class GuPiaoView: UIView {
      
      - parameter psyarray: PSY
      */
-    func setPSY(psyarray:NSArray) {
+    func setPSY(_ psyarray:NSArray) {
         
         psyArray = self.getLineArray(psyarray)
 }
@@ -697,7 +712,7 @@ class GuPiaoView: UIView {
      
      - parameter dpoarray: DPO
      */
-    func setDPO(dpoarray:NSArray) {
+    func setDPO(_ dpoarray:NSArray) {
         
         dpoArray = self.getLineArray(dpoarray)
 }
@@ -707,7 +722,7 @@ class GuPiaoView: UIView {
      
      - parameter asiarray: ASI
      */
-    func setASI(asiarray:NSArray) {
+    func setASI(_ asiarray:NSArray) {
         
         asiArray = self.getLineArray(asiarray)
 }
@@ -718,87 +733,87 @@ class GuPiaoView: UIView {
     func setFangKuang() {
         
         let  ctxSK =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxSK, padding, padding);
-        CGContextAddLineToPoint(ctxSK, VIEW_SIZE.width - padding, padding)
-        CGContextAddLineToPoint(ctxSK, VIEW_SIZE.width - padding, padding + 4*squareH)
-        CGContextAddLineToPoint(ctxSK, padding, padding + 4*squareH);
-        CGContextClosePath(ctxSK)
-        CGContextSetLineWidth(ctxSK, 1)
+        ctxSK?.move(to: CGPoint(x: padding, y: padding));
+        ctxSK?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding))
+        ctxSK?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + 4*squareH))
+        ctxSK?.addLine(to: CGPoint(x: padding, y: padding + 4*squareH));
+        ctxSK?.closePath()
+        ctxSK?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxSK)
+        ctxSK?.strokePath()
         
         let  ctxxK =  UIGraphicsGetCurrentContext();
-        CGContextMoveToPoint(ctxxK, padding, 2*padding + 4*squareH)
-        CGContextAddLineToPoint(ctxxK, VIEW_SIZE.width - padding, 2 * padding + 4*squareH)
-        CGContextAddLineToPoint(ctxxK, VIEW_SIZE.width - padding, VIEW_SIZE.height - buttompadding);
-        CGContextAddLineToPoint(ctxxK, padding, VIEW_SIZE.height - buttompadding)
-        CGContextClosePath(ctxxK)
-        CGContextSetLineWidth(ctxxK, 1)
+        ctxxK?.move(to: CGPoint(x: padding, y: 2*padding + 4*squareH))
+        ctxxK?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: 2 * padding + 4*squareH))
+        ctxxK?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: VIEW_SIZE.height - buttompadding));
+        ctxxK?.addLine(to: CGPoint(x: padding, y: VIEW_SIZE.height - buttompadding))
+        ctxxK?.closePath()
+        ctxxK?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxxK)
+        ctxxK?.strokePath()
         //1coloum
         let ctxc11 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxc11, padding + squareW, padding)
-        CGContextAddLineToPoint(ctxc11, padding + squareW, padding + 4*squareH)
-        CGContextSetLineWidth(ctxc11, 1)
+        ctxc11?.move(to: CGPoint(x: padding + squareW, y: padding))
+        ctxc11?.addLine(to: CGPoint(x: padding + squareW, y: padding + 4*squareH))
+        ctxc11?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxc11)
+        ctxc11?.strokePath()
         
         let  ctxc12 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxc12, padding + 2*squareW, padding)
-        CGContextAddLineToPoint(ctxc12, padding + 2*squareW, padding + 4*squareH)
-        CGContextSetLineWidth(ctxc12, 1)
+        ctxc12?.move(to: CGPoint(x: padding + 2*squareW, y: padding))
+        ctxc12?.addLine(to: CGPoint(x: padding + 2*squareW, y: padding + 4*squareH))
+        ctxc12?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxc12)
+        ctxc12?.strokePath()
         
         let  ctxc13 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxc13, padding + 3*squareW, padding)
-        CGContextAddLineToPoint(ctxc13, padding + 3*squareW, padding + 4*squareH)
-        CGContextSetLineWidth(ctxc13, 1)
+        ctxc13?.move(to: CGPoint(x: padding + 3*squareW, y: padding))
+        ctxc13?.addLine(to: CGPoint(x: padding + 3*squareW, y: padding + 4*squareH))
+        ctxc13?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxc13);
+        ctxc13?.strokePath();
         //1row
         let  ctxr11 =  UIGraphicsGetCurrentContext();
-        CGContextMoveToPoint(ctxr11, padding, padding + squareH * 1 )
-        CGContextAddLineToPoint(ctxr11,VIEW_SIZE.width - padding, padding + squareH * 1 )
-        CGContextSetLineWidth(ctxr11, 1)
+        ctxr11?.move(to: CGPoint(x: padding, y: padding + squareH * 1))
+        ctxr11?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH * 1))
+        ctxr11?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxr11)
+        ctxr11?.strokePath()
         
         let  ctxr13 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxr13, padding, padding + squareH * 3 )
-        CGContextAddLineToPoint(ctxr13,VIEW_SIZE.width - padding, padding + squareH * 3 )
-        CGContextSetLineWidth(ctxr13, 1)
+        ctxr13?.move(to: CGPoint(x: padding, y: padding + squareH * 3))
+        ctxr13?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH * 3))
+        ctxr13?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxr13)
+        ctxr13?.strokePath()
         //2colum
         let  ctxc21 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxc21, padding + squareW, 2 * padding + 4 * squareH)
-        CGContextAddLineToPoint(ctxc21, padding + squareW, VIEW_SIZE.height - buttompadding)
-        CGContextSetLineWidth(ctxc21, 1)
+        ctxc21?.move(to: CGPoint(x: padding + squareW, y: 2 * padding + 4 * squareH))
+        ctxc21?.addLine(to: CGPoint(x: padding + squareW, y: VIEW_SIZE.height - buttompadding))
+        ctxc21?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxc21)
+        ctxc21?.strokePath()
         
         let  ctxc22 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxc22, padding + 2*squareW, 2 * padding + 4 * squareH)
-        CGContextAddLineToPoint(ctxc22, padding + 2*squareW, VIEW_SIZE.height - buttompadding)
-        CGContextSetLineWidth(ctxc22, 1)
+        ctxc22?.move(to: CGPoint(x: padding + 2*squareW, y: 2 * padding + 4 * squareH))
+        ctxc22?.addLine(to: CGPoint(x: padding + 2*squareW, y: VIEW_SIZE.height - buttompadding))
+        ctxc22?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxc22)
+        ctxc22?.strokePath()
         
         let ctxc23 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxc23, padding + 3*squareW, 2 * padding + 4 * squareH)
-        CGContextAddLineToPoint(ctxc23, padding + 3*squareW, VIEW_SIZE.height - buttompadding)
-        CGContextSetLineWidth(ctxc23, 1)
+        ctxc23?.move(to: CGPoint(x: padding + 3*squareW, y: 2 * padding + 4 * squareH))
+        ctxc23?.addLine(to: CGPoint(x: padding + 3*squareW, y: VIEW_SIZE.height - buttompadding))
+        ctxc23?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxc23)
+        ctxc23?.strokePath()
         //2row
         let  ctxr21 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxr21, padding, 2 * padding + squareH * 5 )
-        CGContextAddLineToPoint(ctxr21,VIEW_SIZE.width - padding, 2 * padding + squareH * 5 )
-        CGContextSetLineWidth(ctxr21, 1)
+        ctxr21?.move(to: CGPoint(x: padding, y: 2 * padding + squareH * 5))
+        ctxr21?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: 2 * padding + squareH * 5))
+        ctxr21?.setLineWidth(1)
         self.setColor(239, g: 243, b: 244, a: 1).set()
-        CGContextStrokePath(ctxr21)
+        ctxr21?.strokePath()
 }
  
     
@@ -808,21 +823,21 @@ class GuPiaoView: UIView {
     
      func setBiaoQian() {
         //left
-        zuigaoL.frame = CGRectMake(padding + 1, padding + 1, 50, 15)
-        zuidiL.frame =  CGRectMake(padding + 1, padding + 4 * squareH - 15, 50, 15)
-        jyzl.frame =  CGRectMake(padding + 1, 2 * padding + 4 * squareH , 50, 15)
+        zuigaoL.frame = CGRect(x: padding + 1, y: padding + 1, width: 50, height: 15)
+        zuidiL.frame =  CGRect(x: padding + 1, y: padding + 4 * squareH - 15, width: 50, height: 15)
+        jyzl.frame =  CGRect(x: padding + 1, y: 2 * padding + 4 * squareH , width: 50, height: 15)
         //right
-        zuigaoB.frame =  CGRectMake( VIEW_SIZE.width - padding - 51, padding + 1, 50, 15)
-        zuidiB.frame = CGRectMake(VIEW_SIZE.width - padding - 51, padding + 4 * squareH - 15, 50, 15)
+        zuigaoB.frame =  CGRect( x: VIEW_SIZE.width - padding - 51, y: padding + 1, width: 50, height: 15)
+        zuidiB.frame = CGRect(x: VIEW_SIZE.width - padding - 51, y: padding + 4 * squareH - 15, width: 50, height: 15)
         //shijian
-        shijian1.frame = CGRectMake( padding , VIEW_SIZE.height - 20, 50, 15)
-        shijian2.frame = CGRectMake( padding + squareW - 25 , VIEW_SIZE.height - 20, 50, 15)
-        shijian3.frame = CGRectMake( padding + 2 * squareW - 25 , VIEW_SIZE.height - 20, 50, 15)
-        shijian4.frame = CGRectMake( padding + 3 * squareW - 25 , VIEW_SIZE.height - 20, 50, 15)
-        shijian5.frame = CGRectMake( VIEW_SIZE.width - 56 , VIEW_SIZE.height - 20, 50, 15)
+        shijian1.frame = CGRect( x: padding , y: VIEW_SIZE.height - 20, width: 50, height: 15)
+        shijian2.frame = CGRect( x: padding + squareW - 25 , y: VIEW_SIZE.height - 20, width: 50, height: 15)
+        shijian3.frame = CGRect( x: padding + 2 * squareW - 25 , y: VIEW_SIZE.height - 20, width: 50, height: 15)
+        shijian4.frame = CGRect( x: padding + 3 * squareW - 25 , y: VIEW_SIZE.height - 20, width: 50, height: 15)
+        shijian5.frame = CGRect( x: VIEW_SIZE.width - 56 , y: VIEW_SIZE.height - 20, width: 50, height: 15)
     
             if (self.isShiZiXianShown == true) {
-            shiZiLayer.frame = CGRectMake(0, 0, VIEW_SIZE.width, VIEW_SIZE.height)
+            shiZiLayer.frame = CGRect(x: 0, y: 0, width: VIEW_SIZE.width, height: VIEW_SIZE.height)
             shiZiLayer.setNeedsDisplay()
     }
 }
@@ -832,20 +847,20 @@ class GuPiaoView: UIView {
     func setFenShiTu() {
         //zhexiantianchong
         let  dazhexianY =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(dazhexianY, padding, padding + 4 * squareH)
+        dazhexianY?.move(to: CGPoint(x: padding, y: padding + 4 * squareH))
         let count1 =  fenShiDaZhe.count
         for  i in 0 ..< count1 {
             let percentage = fenShiDaZhe[i] as! CGFloat
             let x = padding +  squareW / 60 * CGFloat(i)
             let y = padding + 4 * squareH * (1 - percentage)
-            CGContextAddLineToPoint(dazhexianY, x, y)
+            dazhexianY?.addLine(to: CGPoint(x: x, y: y))
         }
         let lastPointX = padding + CGFloat(count1) * squareW / 60
-        CGContextAddLineToPoint(dazhexianY, lastPointX, padding + 4 * squareH)
+        dazhexianY?.addLine(to: CGPoint(x: lastPointX, y: padding + 4 * squareH))
         self.setColor(229, g: 241, b: 250, a: 1).set()
-        CGContextSetLineJoin(dazhexianY, .Round)
-        CGContextClosePath(dazhexianY)
-        CGContextFillPath(dazhexianY)
+        dazhexianY?.setLineJoin(.round)
+        dazhexianY?.closePath()
+        dazhexianY?.fillPath()
         //dazhexian
         let  dazhexian =  UIGraphicsGetCurrentContext()
         for i in 0 ..< count1 {
@@ -854,16 +869,16 @@ class GuPiaoView: UIView {
             let y = padding + 4 * squareH * (1 - percentage)
             
             if (i == 0) {
-                CGContextMoveToPoint(dazhexian, x , y )
+                dazhexian?.move(to: CGPoint(x: x, y: y))
             }
             else
             {
-                CGContextAddLineToPoint(dazhexian, x, y)
+                dazhexian?.addLine(to: CGPoint(x: x, y: y))
             }
         }
         self.setColor(152, g: 168, b: 191, a: 1).set()
-        CGContextSetLineJoin(dazhexian, .Round)
-        CGContextStrokePath(dazhexian)
+        dazhexian?.setLineJoin(.round)
+        dazhexian?.strokePath()
         //xiaozhexian
         let xiaozhexian =  UIGraphicsGetCurrentContext()
         let count2 = fenShiXiaoZhe.count
@@ -872,25 +887,26 @@ class GuPiaoView: UIView {
             let x = padding +  squareW / 60 * CGFloat(i)
             let y = padding + 4 * squareH * (1 - percentage)
             if (i == 0) {
-                CGContextMoveToPoint(xiaozhexian, x , y )
+                xiaozhexian?.move(to: CGPoint(x: x, y: y))
             }
             else
             {
-                CGContextAddLineToPoint(xiaozhexian, x, y)
+                xiaozhexian?.addLine(to: CGPoint(x: x, y: y))
             }
         }
         self.setColor(252, g: 197, b: 152, a: 1).set()
-        CGContextSetLineJoin(xiaozhexian, .Round)
-        CGContextStrokePath(xiaozhexian);
+        xiaozhexian?.setLineJoin(.round)
+        xiaozhexian?.strokePath();
         //虚线
         let lengths:[CGFloat] = [4,4]
         let ctxr12 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxr12, padding, padding + squareH * 2 )
-        CGContextAddLineToPoint(ctxr12,VIEW_SIZE.width - padding, padding + squareH * 2 )
-        CGContextSetLineDash(ctxr12, 5.0, lengths , Int((lengths[0] + lengths[1]) / lengths[0]))
-        CGContextSetLineWidth(ctxr12, 1)
+        ctxr12?.move(to: CGPoint(x: padding, y: padding + squareH * 2))
+        ctxr12?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH * 2))
+
+        ctxr12?.setLineDash(phase: 5.0, lengths: lengths)
+        ctxr12?.setLineWidth(1)
         self.setColor(143, g: 243, b: 249, a: 1).set()
-        CGContextStrokePath(ctxr12)
+        ctxr12?.strokePath()
 }
     
     
@@ -898,27 +914,28 @@ class GuPiaoView: UIView {
     func setVol1() {
         let count  = fenShiVol.count
         for  i in 0 ..< count {
-            let redorblue = fenShiVol[i][0] as! CGFloat
-            let percentage = fenShiVol[i][1] as! CGFloat
-            self.zhutu1Index(i, redOrBlue: Bool(redorblue) , percentage: percentage)
-        }
-}
+            let arra = fenShiVol[i];
+            let redorblue = arra[0] as! CGFloat
+            let percentage = arra[1] as! CGFloat
+
+            self.zhutu1Index(i, redOrBlue: (redorblue != 0), percentage: CGFloat(Float(percentage)))
+         }
+    }
     
     
     
+    func zhutu1Index(_ index:Int , redOrBlue:Bool, percentage:CGFloat) {
     
-    func zhutu1Index(index:Int , redOrBlue:Bool, percentage:CGFloat) {
-       
         let startPointX = padding  + squareW / 60 * CGFloat(index)
-        let startPointY = VIEW_SIZE.height - buttompadding
+        let startPointY = VIEW_SIZE.height  - buttompadding
         let endPointX = padding  + squareW / 60 * CGFloat(index)
         let endPointY = VIEW_SIZE.height  - buttompadding -  2 * squareH  * percentage
         
         let ctx =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctx, startPointX, startPointY)
-        CGContextAddLineToPoint(ctx, endPointX, endPointY)
-        self.setColor(236, g: 86 , b: 85 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.move(to: CGPoint(x: startPointX, y: startPointY))
+        ctx?.addLine(to: CGPoint(x: endPointX, y: endPointY))
+        redOrBlue ?  self.setColor(236, g: 86 , b: 85 , a: 1).set() : self.setColor(30, g: 170 , b: 94 , a: 1).set()
+        ctx?.strokePath()
 }
    
     
@@ -927,88 +944,89 @@ class GuPiaoView: UIView {
     
     func setFangKuang2() {
         let  ctxSK =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxSK, padding, padding)
-        CGContextAddLineToPoint(ctxSK, VIEW_SIZE.width - padding, padding)
-        CGContextAddLineToPoint(ctxSK, VIEW_SIZE.width - padding, padding + 4*squareH1)
-        CGContextAddLineToPoint(ctxSK, padding, padding + 4*squareH1)
-        CGContextClosePath(ctxSK)
-        CGContextSetLineWidth(ctxSK, 1)
+        ctxSK?.move(to: CGPoint(x: padding, y: padding))
+        ctxSK?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding))
+        ctxSK?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + 4*squareH1))
+        ctxSK?.addLine(to: CGPoint(x: padding, y: padding + 4*squareH1))
+        ctxSK?.closePath()
+        ctxSK?.setLineWidth(1)
         self.setColor(239, g: 243 , b: 244 , a: 1).set()
-        CGContextStrokePath(ctxSK)
+        ctxSK?.strokePath()
         
        let ctxxK =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxxK, padding, 2*padding + buttompadding + 4*squareH1)
-        CGContextAddLineToPoint(ctxxK, VIEW_SIZE.width - padding, 2*padding + buttompadding + 4*squareH1)
-        CGContextAddLineToPoint(ctxxK, VIEW_SIZE.width - padding, VIEW_SIZE.height - padding)
-        CGContextAddLineToPoint(ctxxK, padding, VIEW_SIZE.height - padding)
-        CGContextClosePath(ctxxK)
-        CGContextSetLineWidth(ctxxK, 1)
+        ctxxK?.move(to: CGPoint(x: padding, y: 2*padding + buttompadding + 4*squareH1))
+        ctxxK?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: 2*padding + buttompadding + 4*squareH1))
+        ctxxK?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: VIEW_SIZE.height - padding))
+        ctxxK?.addLine(to: CGPoint(x: padding, y: VIEW_SIZE.height - padding))
+        ctxxK?.closePath()
+        ctxxK?.setLineWidth(1)
         self.setColor(239, g: 243 , b: 244 , a: 1).set()
-        CGContextStrokePath(ctxxK)
+        ctxxK?.strokePath()
         
-        let lengths:[CGFloat] = [4,4]
+        let lengths:[CGFloat] = [2,2]
         let ctxr11 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxr11, padding, padding + squareH1 * 1 )
-        CGContextAddLineToPoint(ctxr11,VIEW_SIZE.width - padding, padding + squareH1 * 1 )
-        CGContextSetLineDash(ctxr11, 5.0, lengths , Int((lengths[0] + lengths[1]) / lengths[0]))
-        CGContextSetLineWidth(ctxr11, 1)
+        ctxr11?.move(to: CGPoint(x: padding, y: padding + squareH1 * 1))
+        ctxr11?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH1 * 1))
+        ctxr11?.setLineDash(phase: 5.0, lengths: lengths)
+        ctxr11?.setLineWidth(1)
         self.setColor(239, g: 243 , b: 244 , a: 1).set()
 
-        CGContextStrokePath(ctxr11)
+        ctxr11?.strokePath()
     
         let ctxr12 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxr12, padding, padding + squareH1 * 2 )
-        CGContextAddLineToPoint(ctxr12,VIEW_SIZE.width - padding, padding + squareH1 * 2 )
-        CGContextSetLineWidth(ctxr12, 1)
+        ctxr12?.move(to: CGPoint(x: padding, y: padding + squareH1 * 2))
+        ctxr12?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH1 * 2))
+        ctxr12?.setLineWidth(1)
         self.setColor(239, g: 243 , b: 244 , a: 1).set()
-        CGContextStrokePath(ctxr12)
+        ctxr12?.strokePath()
         
         let ctxr13 =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctxr13, padding, padding + squareH1 * 3 )
-        CGContextAddLineToPoint(ctxr13,VIEW_SIZE.width - padding, padding + squareH1 * 3 )
-        CGContextSetLineWidth(ctxr13, 1)
+        ctxr13?.move(to: CGPoint(x: padding, y: padding + squareH1 * 3))
+        ctxr13?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH1 * 3))
+        ctxr13?.setLineWidth(1)
         self.setColor(239, g: 243 , b: 244 , a: 1).set()
-        CGContextStrokePath(ctxr13)
+        ctxr13?.strokePath()
         
         if( isZoomMode == false) {
             //ROW HIDE
             let  ctxrH1 =  UIGraphicsGetCurrentContext()
-            CGContextMoveToPoint(ctxrH1, padding, padding + squareH1 / 2 * 1 )
-            CGContextAddLineToPoint(ctxrH1,VIEW_SIZE.width - padding, padding + squareH1 / 2 * 1 )
-            CGContextSetLineWidth(ctxrH1, 1)
+            ctxrH1?.move(to: CGPoint(x: padding, y: padding + squareH1 / 2 * 1))
+            ctxrH1?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH1 / 2 * 1))
+            ctxrH1?.setLineWidth(1)
             self.setColor(239, g: 243 , b: 244 , a: 1).set()
-            CGContextStrokePath(ctxrH1)
+            ctxrH1?.strokePath()
             
             let ctxrH2 =  UIGraphicsGetCurrentContext()
-            CGContextMoveToPoint(ctxrH2, padding, padding + squareH1 / 2 * 3 )
-            CGContextAddLineToPoint(ctxrH2,VIEW_SIZE.width - padding, padding + squareH1 / 2 * 3 )
-            CGContextSetLineWidth(ctxrH2, 1)
+            ctxrH2?.move(to: CGPoint(x: padding, y: padding + squareH1 / 2 * 3))
+            ctxrH2?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH1 / 2 * 3))
+            ctxrH2?.setLineWidth(1)
             self.setColor(239, g: 243 , b: 244 , a: 1).set()
-            CGContextStrokePath(ctxrH2)
+            ctxrH2?.strokePath()
             
             let ctxrH3 =  UIGraphicsGetCurrentContext()
-            CGContextMoveToPoint(ctxrH3, padding, padding + squareH1 / 2 * 5 )
-            CGContextAddLineToPoint(ctxrH3,VIEW_SIZE.width - padding, padding + squareH1 / 2 * 5 )
-            CGContextSetLineWidth(ctxrH3, 1)
+            ctxrH3?.move(to: CGPoint(x: padding, y: padding + squareH1 / 2 * 5))
+            ctxrH3?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH1 / 2 * 5))
+            ctxrH3?.setLineWidth(1)
             self.setColor(239, g: 243 , b: 244 , a: 1).set()
-            CGContextStrokePath(ctxrH3)
+            ctxrH3?.strokePath()
             
             let ctxrH4 =  UIGraphicsGetCurrentContext()
-            CGContextMoveToPoint(ctxrH4, padding, padding + squareH1 / 2 * 7 )
-            CGContextAddLineToPoint(ctxrH4,VIEW_SIZE.width - padding, padding + squareH1 / 2 * 7 )
-            CGContextSetLineWidth(ctxrH4, 1)
+            ctxrH4?.move(to: CGPoint(x: padding, y: padding + squareH1 / 2 * 7))
+            ctxrH4?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding + squareH1 / 2 * 7))
+            ctxrH4?.setLineWidth(1)
             self.setColor(239, g: 243 , b: 244 , a: 1).set()
-            CGContextStrokePath(ctxrH4)
+            ctxrH4?.strokePath()
             //2row
             let ctxrH5 =  UIGraphicsGetCurrentContext()
-            CGContextMoveToPoint(ctxrH5, padding, VIEW_SIZE.height - padding - squareH1 / 2 )
-            CGContextAddLineToPoint(ctxrH5,VIEW_SIZE.width - padding, VIEW_SIZE.height - padding - squareH1 / 2 )
-            CGContextSetLineWidth(ctxrH5, 1)
+            ctxrH5?.move(to: CGPoint(x: padding, y: VIEW_SIZE.height - padding - squareH1 / 2))
+            ctxrH5?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: VIEW_SIZE.height - padding - squareH1 / 2))
+            ctxrH5?.setLineWidth(1)
             self.setColor(239, g: 243 , b: 244 , a: 1).set()
-            CGContextStrokePath(ctxrH5)
+            ctxrH5?.strokePath()
         }
         if (isShiZiXianShown == true) {
-            shiZiLayer.frame = CGRectMake(0, 0, VIEW_SIZE.width, VIEW_SIZE.height)
+            shiZiLayer.shiZiXian = .phShiZiStyleLaZhuTu
+            shiZiLayer.frame = CGRect(x: 0, y: 0, width: VIEW_SIZE.width, height: VIEW_SIZE.height)
             shiZiLayer.setNeedsDisplay()
         }
 }
@@ -1019,66 +1037,66 @@ class GuPiaoView: UIView {
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let lazhuCXwidth = lazhuUnitDot * 3
         let count = laZhuTuTransArray.count
-        
-        let lengths:[CGFloat] = [0,0]
+        let laZhuTuTransArrayT = laZhuTuTransArray as![NSArray]
+        let lengths:[CGFloat] = [1,0]
         let ctx =  UIGraphicsGetCurrentContext()
-        CGContextSetLineDash(ctx, 5.0, lengths, 0)
+        ctx?.setLineDash(phase: 5.0, lengths: lengths)
         //蜡烛图
         for  i  in 0 ..< count {
-            let high  = laZhuTuTransArray[i][0] as! CGFloat
-            let low   = laZhuTuTransArray[i][1] as! CGFloat
-            let open  = laZhuTuTransArray[i][2] as! CGFloat
-            let close = laZhuTuTransArray[i][3] as! CGFloat
+            let high  = laZhuTuTransArrayT[i][0] as! CGFloat
+            let low   = laZhuTuTransArrayT[i][1] as! CGFloat
+            let open  = laZhuTuTransArrayT[i][2] as! CGFloat
+            let close = laZhuTuTransArrayT[i][3] as! CGFloat
             if ( close > open) {
                 self.setColor(252, g: 64 , b: 69 , a: 1).set()
             }else
             {
                 self.setColor(56, g: 171 , b: 36 , a: 1).set()
             }
-            CGContextMoveToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot , padding + ( 1 - high) * 4 * squareH1 )
-            CGContextAddLineToPoint(ctx,padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, padding + ( 1 - low) * 4 * squareH1  )
-            CGContextSetLineWidth(ctx, lazhuUnitDot)
-            CGContextStrokePath(ctx)
+            ctx?.move(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: padding + ( 1 - high) * 4 * squareH1))
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: padding + ( 1 - low) * 4 * squareH1))
+            ctx?.setLineWidth(lazhuUnitDot)
+            ctx?.strokePath()
             
-            CGContextMoveToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, padding + ( 1 - open) * 4 * squareH1  )
-            CGContextAddLineToPoint(ctx,padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, padding + ( 1 - close) * 4 * squareH1 )
-            CGContextSetLineWidth(ctx, lazhuCXwidth)
-            CGContextStrokePath(ctx)
+            ctx?.move(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: padding + ( 1 - open) * 4 * squareH1))
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: padding + ( 1 - close) * 4 * squareH1))
+            ctx?.setLineWidth(lazhuCXwidth)
+            ctx?.strokePath()
         }
         //M5线
-        CGContextSetLineWidth(ctx, lazhuUnitDot)
-        CGContextSetLineJoin(ctx, .Round)
+        ctx?.setLineWidth(lazhuUnitDot)
+        ctx?.setLineJoin(.round)
         
-        let m5lineStart = laZhuTuTransArray[0][4] as! CGFloat
-        let m10lineStart = laZhuTuTransArray[0][5] as! CGFloat
-        let m20lineStart  = laZhuTuTransArray[0][6] as! CGFloat
+        let m5lineStart = laZhuTuTransArrayT[0][4] as! CGFloat
+        let m10lineStart = laZhuTuTransArrayT[0][5] as! CGFloat
+        let m20lineStart  = laZhuTuTransArrayT[0][6] as! CGFloat
         
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, padding + ( 1 - m5lineStart) * 4 * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: padding + ( 1 - m5lineStart) * 4 * squareH1))
         for i  in 0 ..< count {
-            let m5line = laZhuTuTransArray[i][4] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, padding + ( 1 - m5line) * 4 * squareH1)
+            let m5line = laZhuTuTransArrayT[i][4] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: padding + ( 1 - m5line) * 4 * squareH1))
         }
         self.setColor(67, g: 188 , b: 252 , a: 1).set()
-        CGContextSetLineWidth(ctx, 0.5)
-        CGContextStrokePath(ctx)
+        ctx?.setLineWidth(0.5)
+        ctx?.strokePath()
         //M10线
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, padding + ( 1 - m10lineStart) * 4 * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: padding + ( 1 - m10lineStart) * 4 * squareH1))
         for i  in 0 ..< count  {
-            let m10line = laZhuTuTransArray[i][5] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, padding + ( 1 - m10line) * 4 * squareH1)
+            let m10line = laZhuTuTransArrayT[i][5] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: padding + ( 1 - m10line) * 4 * squareH1))
         }
         self.setColor(236, g: 194 , b: 81 , a: 1).set()
-        CGContextSetLineWidth(ctx, 0.5)
-        CGContextStrokePath(ctx)
+        ctx?.setLineWidth(0.5)
+        ctx?.strokePath()
         //M20线
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, padding + ( 1 - m20lineStart) * 4 * squareH1);
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: padding + ( 1 - m20lineStart) * 4 * squareH1));
         for i  in 0 ..< count {
-            let m20line  = laZhuTuTransArray[i][6] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, padding + ( 1 - m20line) * 4 * squareH1)
+            let m20line  = laZhuTuTransArrayT[i][6] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: padding + ( 1 - m20line) * 4 * squareH1))
         }
         self.setColor(224, g: 106 , b: 237 , a: 1).set()
-        CGContextSetLineWidth(ctx, 0.5)
-        CGContextStrokePath(ctx)
+        ctx?.setLineWidth(0.5)
+        ctx?.strokePath()
 }
   
     
@@ -1086,16 +1104,17 @@ class GuPiaoView: UIView {
     func setVol2() {
         let count  = volArray.count
         for  i in 0 ..< count {
-            let redorblue = volArray[i][0] as! CGFloat
-            let percentage = volArray[i][1] as! CGFloat
-            self.zhutu2Index(i, redOrBlue: Bool(redorblue) , percentage: percentage)
+            let volArrayT = volArray
+            let redorblue = volArrayT[i][0]as!CGFloat
+            let percentage = volArrayT[i][1]as!CGFloat
+            self.zhutu2Index(i, redOrBlue: (redorblue == 1) , percentage: percentage)
         }
 }
     
     
     
     
-    func zhutu2Index(index:Int , redOrBlue:Bool, percentage:CGFloat) {
+    func zhutu2Index(_ index:Int , redOrBlue:Bool, percentage:CGFloat) {
         
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let lazhuCXwidth = lazhuUnitDot * 3
@@ -1106,11 +1125,11 @@ class GuPiaoView: UIView {
         let endPointY = VIEW_SIZE.height  - padding -  squareH1  * percentage
         
         let ctx =  UIGraphicsGetCurrentContext()
-        CGContextMoveToPoint(ctx, startPointX, startPointY)
-        CGContextAddLineToPoint(ctx, endPointX, endPointY)
-        self.setColor(236, g: 86 , b: 85 , a: 1).set()
-        CGContextSetLineWidth(ctx, lazhuCXwidth)
-        CGContextStrokePath(ctx)
+        ctx?.move(to: CGPoint(x: startPointX, y: startPointY))
+        ctx?.addLine(to: CGPoint(x: endPointX, y: endPointY))
+        redOrBlue ?  self.setColor(236, g: 86 , b: 85 , a: 1).set() : self.setColor(30, g: 170 , b: 94 , a: 1).set()
+        ctx?.setLineWidth(lazhuCXwidth)
+        ctx?.strokePath()
 }
     
     
@@ -1119,33 +1138,33 @@ class GuPiaoView: UIView {
     func setMACD() {
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let startpointy = VIEW_SIZE.height - padding - squareH1 / 2
-        
+        let macdArrayT = macdArray as![NSArray]
         let count  = macdArray.count
         let ctx =  UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(ctx, 1)
-        CGContextSetLineJoin(ctx, .Round)
+        ctx?.setLineWidth(1)
+        ctx?.setLineJoin(.round)
         //EMA12线
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - ( macdArray[0][0]  as!CGFloat ) * squareH1 / 2)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - ( macdArrayT[0][0]  as!CGFloat ) * squareH1 / 2))
         for i in 0 ..< count {
-            let ema12value = macdArray[i][0] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 / 2 * ema12value)
+            let ema12value = macdArrayT[i][0] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 / 2 * ema12value))
         }
         self.setColor(97, g: 177 , b: 209 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //EMA26线
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - ( macdArray[0][1]  as!CGFloat ) * squareH1/2)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - ( macdArrayT[0][1]  as!CGFloat ) * squareH1/2))
         
         for i in 0 ..< count {
-            let ema26value = macdArray[i][1] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 / 2 * ema26value)
+            let ema26value = macdArrayT[i][1] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 / 2 * ema26value))
         }
         self.setColor(220, g: 200 , b: 106 , a: 1).set()
-        CGContextStrokePath(ctx);
+        ctx?.strokePath();
         //阴阳线
         for i in 0 ..< count {
-            CGContextMoveToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy)
-            let difnumber = macdArray[i][2] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 / 2 * difnumber)
+            ctx?.move(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy))
+            let difnumber = macdArrayT[i][2] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 / 2 * difnumber))
             if (difnumber < 0) {
                 self.setColor(81, g: 182 , b: 64 , a: 1).set()
             }
@@ -1153,7 +1172,7 @@ class GuPiaoView: UIView {
             {
                 self.setColor(253, g: 73 , b: 83 , a: 1).set()
             }
-            CGContextStrokePath(ctx)
+            ctx?.strokePath()
         }
 }
     
@@ -1162,34 +1181,35 @@ class GuPiaoView: UIView {
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324;
         let startpointy = VIEW_SIZE.height - padding
         
+        let kdjArrayT = kdjArray as![NSArray]
         let count  = kdjArray.count
         let  ctx =  UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(ctx, 1)
-        CGContextSetLineJoin(ctx, .Round)
+        ctx?.setLineWidth(1)
+        ctx?.setLineJoin(.round)
         //k
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (kdjArray[0][0] as! CGFloat ) * squareH1 )
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (kdjArrayT[0][0] as! CGFloat ) * squareH1))
         for i in 0 ..< count {
-            let kvalue = kdjArray[i][0] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * kvalue)
+            let kvalue = kdjArrayT[i][0] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * kvalue))
         }
         self.setColor(213, g: 145 , b: 225 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //d
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (kdjArray[0][1] as! CGFloat) * squareH1 )
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (kdjArrayT[0][1] as! CGFloat) * squareH1))
         for i in 0 ..< count {
-            let dvalue = kdjArray[i][1] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * dvalue)
+            let dvalue = kdjArrayT[i][1] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * dvalue))
         }
         self.setColor(83, g: 170 , b: 210 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //j
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (kdjArray[0][2] as! CGFloat) * squareH1 )
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (kdjArrayT[0][2] as! CGFloat) * squareH1))
         for i in 0 ..< count {
-            let jvalue = kdjArray[i][2] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * jvalue )
+            let jvalue = kdjArrayT[i][2] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * jvalue))
         }
         self.setColor(218, g: 198 , b: 214 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
 }
   
     
@@ -1198,34 +1218,35 @@ class GuPiaoView: UIView {
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let startpointy = VIEW_SIZE.height - padding
         
+        let rsiArrayT = rsiArray as![NSArray]
         let count  = rsiArray.count
         let ctx =  UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(ctx, 1)
-        CGContextSetLineJoin(ctx, .Round)
+        ctx?.setLineWidth(1)
+        ctx?.setLineJoin(.round)
         //rsi1
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (rsiArray[0][0] as! CGFloat) * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (rsiArrayT[0][0] as! CGFloat) * squareH1))
         for i in 0 ..< count {
-            let rsi1value = rsiArray[i][0] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * rsi1value )
+            let rsi1value = rsiArrayT[i][0] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * rsi1value))
         }
         self.setColor(213, g: 145 , b: 225 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //rsi2
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (rsiArray[0][1] as! CGFloat) * squareH1 )
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (rsiArrayT[0][1] as! CGFloat) * squareH1))
         for i in 0 ..< count {
-            let rsi2value = rsiArray[i][1] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * rsi2value )
+            let rsi2value = rsiArrayT[i][1] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * rsi2value))
         }
         self.setColor(83, g: 170 , b: 210 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //rsi3
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (rsiArray[0][2] as! CGFloat) * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (rsiArrayT[0][2] as! CGFloat) * squareH1))
         for i in 0 ..< count {
-            let rsi3value = rsiArray[i][2] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * rsi3value )
+            let rsi3value = rsiArrayT[i][2] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * rsi3value))
         }
         self.setColor(218, g: 198 , b: 214 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
 }
 
     
@@ -1235,34 +1256,35 @@ class GuPiaoView: UIView {
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let startpointy = VIEW_SIZE.height - padding
         
+        let biasArrayT = biasArray as![NSArray]
         let count  = biasArray.count
         let ctx =  UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(ctx, 1)
-        CGContextSetLineJoin(ctx, .Round)
+        ctx?.setLineWidth(1)
+        ctx?.setLineJoin(.round)
         //bias1
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (biasArray[0][0] as! CGFloat) * squareH1 )
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (biasArrayT[0][0] as! CGFloat) * squareH1))
         for i in 0 ..< count {
-            let bias1value = biasArray[i][0] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * bias1value )
+            let bias1value = biasArrayT[i][0] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * bias1value))
         }
         self.setColor(213, g: 145 , b: 225 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //bias2
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (biasArray[0][1] as! CGFloat) * squareH1 )
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (biasArrayT[0][1] as! CGFloat) * squareH1))
         for i in 0 ..< count {
-            let bias2value = biasArray[i][1] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * bias2value )
+            let bias2value = biasArrayT[i][1] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * bias2value))
         }
         self.setColor(83, g: 170 , b: 210 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //bias3
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (biasArray[0][2] as! CGFloat) * squareH1 )
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (biasArrayT[0][2] as! CGFloat) * squareH1))
         for i in 0 ..< count {
-            let bias3value = biasArray[i][2] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * bias3value )
+            let bias3value = biasArrayT[i][2] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * bias3value))
         }
         self.setColor(218, g: 198 , b: 214 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
 }
     
     
@@ -1299,34 +1321,35 @@ class GuPiaoView: UIView {
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let startpointy = VIEW_SIZE.height - padding
         
+        let crArrayT = crArray as![NSArray]
         let count = crArray.count
         let ctx =  UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(ctx, 1)
-        CGContextSetLineJoin(ctx, .Round)
+        ctx?.setLineWidth(1)
+        ctx?.setLineJoin(.round)
         //cr1
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (crArray[0][0] as! CGFloat) * squareH1 );
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (crArrayT[0][0] as! CGFloat) * squareH1));
         for  i in 0 ..< count {
-            let cr1value = crArray[i][0] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * cr1value )
+            let cr1value = crArrayT[i][0] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * cr1value))
         }
         self.setColor(213, g: 145 , b: 225 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //cr2
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (crArray[0][1] as! CGFloat) * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (crArrayT[0][1] as! CGFloat) * squareH1))
         for  i in 0 ..< count {
-            let cr2value = crArray[i][1] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * cr2value)
+            let cr2value = crArrayT[i][1] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * cr2value))
         }
         self.setColor(83, g: 170 , b: 210 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //cr3
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (crArray[0][3] as! CGFloat) * squareH1 )
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (crArrayT[0][3] as! CGFloat) * squareH1))
         for  i in 0 ..< count {
-            let cr3value = crArray[i][3] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * cr3value)
+            let cr3value = crArrayT[i][3] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * cr3value))
         }
         self.setColor(218, g: 198 , b: 214 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
 }
     
     
@@ -1335,42 +1358,43 @@ class GuPiaoView: UIView {
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let startpointy = VIEW_SIZE.height - padding
         
+        let dmiArrayT = dmiArray as![NSArray]
         let count  = dmiArray.count
         let ctx =  UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(ctx, 1)
-        CGContextSetLineJoin(ctx, .Round)
+        ctx?.setLineWidth(1)
+        ctx?.setLineJoin(.round)
         //dmi1
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (dmiArray[0][0] as! CGFloat) * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (dmiArrayT[0][0] as! CGFloat) * squareH1))
         for i in 0 ..< count {
-            let dmi1value = dmiArray[i][0] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * dmi1value );
+            let dmi1value = dmiArrayT[i][0] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * dmi1value));
         }
         self.setColor(213, g: 145 , b: 225 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //dmi2
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (dmiArray[0][1] as! CGFloat) * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (dmiArrayT[0][1] as! CGFloat) * squareH1))
         for i in 0 ..< count  {
-            let dmi2value = dmiArray[i][1] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * dmi2value )
+            let dmi2value = dmiArrayT[i][1] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * dmi2value))
         }
         self.setColor(83, g: 170 , b: 210 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //dmi3
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (dmiArray[0][2] as! CGFloat) * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (dmiArrayT[0][2] as! CGFloat) * squareH1))
         for i in 0 ..< count  {
-            let dmi3value = dmiArray[i][2] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * dmi3value)
+            let dmi3value = dmiArrayT[i][2] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * dmi3value))
         }
         self.setColor(218, g: 198 , b: 214 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //dmi4
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (dmiArray[0][3] as! CGFloat) * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (dmiArrayT[0][3] as! CGFloat) * squareH1))
         for i in 0 ..< count  {
-            let dmi4value = dmiArray[i][3] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * dmi4value )
+            let dmi4value = dmiArrayT[i][3] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * dmi4value))
         }
         self.setColor(245, g: 73 , b: 108 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
 }
     
  
@@ -1452,15 +1476,17 @@ class GuPiaoView: UIView {
     
 
     // MARK: 触摸事件
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         print("Touch moves")
+        shiZiLayer.isHidden = false;
+        let laZhuTuTransArrayT = laZhuTuTransArray as![NSArray]
         
     if isShiZiXianShown == true {
             let touch = (touches as NSSet).anyObject()!
-            let current = touch.locationInView(self)
+            let current = (touch as AnyObject).location(in: self)
     
-        if( style ==  .PHChartStyleFenShiTu ) {
+        if( style ==  .phChartStyleFenShiTu ) {
             
             var xvalue = (current.x - 5)/(VIEW_SIZE.width - 10) * 240
             if ( xvalue < 0) {
@@ -1486,7 +1512,7 @@ class GuPiaoView: UIView {
             {
                 xvalue =  CGFloat(laZhuTuTransArray.count - 1)
             }
-            let data = laZhuTuTransArray[Int(xvalue)][3]
+            let data = laZhuTuTransArrayT[Int(xvalue)][3]
             
             shiZiLayer.xValue = current.x
             shiZiLayer.yValue = data as! CGFloat
@@ -1501,44 +1527,45 @@ class GuPiaoView: UIView {
     
 // MARK: utilities
     
-    func setColor(r:CGFloat , g:CGFloat , b:CGFloat , a:Float) -> UIColor {
+    func setColor(_ r:CGFloat , g:CGFloat , b:CGFloat , a:Float) -> UIColor {
         
         return  UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: r)
 }
     
     
-    func drawTwoLine(array:NSArray) {
+    func drawTwoLine(_ array:NSArray) {
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let startpointy = VIEW_SIZE.height - padding
         
+        let arrayT = array as![NSArray]
         let count  = array.count
         let ctx =  UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(ctx, 1)
-        CGContextSetLineJoin(ctx, .Round)
+        ctx?.setLineWidth(1)
+        ctx?.setLineJoin(.round)
         //line1
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (array[0][0] as! CGFloat) * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (arrayT[0][0] as! CGFloat) * squareH1))
         
         for i in 0 ..< count {
-            let line1value = array[i][0] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * line1value )
+            let line1value = arrayT[i][0] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * line1value))
         }
         
         self.setColor(250, g: 202 , b: 65 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
         //line2
-        CGContextMoveToPoint(ctx, padding + 3 * lazhuUnitDot, startpointy - (array[0][1] as! CGFloat) * squareH1)
+        ctx?.move(to: CGPoint(x: padding + 3 * lazhuUnitDot, y: startpointy - (arrayT[0][1] as! CGFloat) * squareH1))
         
         for i in 0 ..< count {
-            let line2value = array[i][1] as! CGFloat
-            CGContextAddLineToPoint(ctx, padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, startpointy - squareH1 * line2value )
+            let line2value = arrayT[i][1] as! CGFloat
+            ctx?.addLine(to: CGPoint(x: padding + (3 + 4 * CGFloat(i)) * lazhuUnitDot, y: startpointy - squareH1 * line2value))
         }
         
         self.setColor(83, g: 170 , b: 210 , a: 1).set()
-        CGContextStrokePath(ctx)
+        ctx?.strokePath()
 }
     
     
-    func getAbosoluteValue(inputvalue:CGFloat) -> CGFloat {
+    func getAbosoluteValue(_ inputvalue:CGFloat) -> CGFloat {
         
         if(inputvalue < 0) {
             
@@ -1550,25 +1577,28 @@ class GuPiaoView: UIView {
   
     
     
-    func getLineArray(array:NSArray) -> NSArray {
-        var  _MAX_NUM = array[0][0] as! CGFloat
-        var  _MIN_NUM = array[0][0] as! CGFloat
+    func getLineArray(_ array:NSArray) -> NSArray {
+        
+        let arrayT = array as! [NSArray]
+        var  _MAX_NUM = arrayT[0][0] as! CGFloat
+        var  _MIN_NUM = arrayT[0][0] as! CGFloat
         
         for element in array {
-            let line1value = element[0] as! CGFloat
-            let line2value = element[1] as! CGFloat
+            let Element = element as!NSArray
+            let line1value = Element[0] as! CGFloat
+            let line2value = Element[1] as! CGFloat
             
             if (_MAX_NUM < line1value ){ _MAX_NUM = line1value }
             if (_MAX_NUM < line2value ){ _MAX_NUM = line2value }
             
             if (_MIN_NUM > line1value ){ _MIN_NUM = line1value }
             if (_MIN_NUM > line2value ){ _MIN_NUM = line2value }
-            if (element.count == 3) {
-                let line3value = element[2] as! CGFloat
+            if (Element.count == 3) {
+                let line3value = Element[2] as! CGFloat
                 if (_MAX_NUM < line3value ){ _MAX_NUM = line3value }
                 if (_MIN_NUM > line3value ){ _MIN_NUM = line3value }
-                if (element.count == 4) {
-                    let line4value = element[3] as! CGFloat
+                if ((element as AnyObject).count == 4) {
+                    let line4value = Element[3] as! CGFloat
                     if (_MAX_NUM < line4value ){ _MAX_NUM = line4value }
                     if (_MIN_NUM > line4value ){ _MIN_NUM = line4value }
                 }
@@ -1577,21 +1607,22 @@ class GuPiaoView: UIView {
         let delta = _MAX_NUM - _MIN_NUM;
         let temptarra = NSMutableArray()
         for element in array {
+            let Element = element as!NSArray
             let temptarray = NSMutableArray()
-            let vr1newvalue = (element[0] as! CGFloat - _MIN_NUM) / delta
-            let vr2newvalue = (element[1] as! CGFloat - _MIN_NUM) / delta
-            temptarray.addObject(vr1newvalue)
-            temptarray.addObject(vr2newvalue)
+            let vr1newvalue = (Element[0] as! CGFloat - _MIN_NUM) / delta
+            let vr2newvalue = (Element[1] as! CGFloat - _MIN_NUM) / delta
+            temptarray.add(vr1newvalue)
+            temptarray.add(vr2newvalue)
             
-            if (element.count == 3) {
-                let vr3newvalue = (element[2] as! CGFloat - _MIN_NUM) / delta
-                temptarray.addObject(vr3newvalue)
-                if (element.count == 4) {
-                    let vr4newvalue = (element[4] as! CGFloat - _MIN_NUM) / delta
-                    temptarray.addObject(vr4newvalue)
+            if (Element.count == 3) {
+                let vr3newvalue = (Element[2] as! CGFloat - _MIN_NUM) / delta
+                temptarray.add(vr3newvalue)
+                if ((element as AnyObject).count == 4) {
+                    let vr4newvalue = (Element[4] as! CGFloat - _MIN_NUM) / delta
+                    temptarray.add(vr4newvalue)
                 }
             }
-            temptarra.addObject(temptarray)
+            temptarra.add(temptarray)
         }
         return temptarra;
 }

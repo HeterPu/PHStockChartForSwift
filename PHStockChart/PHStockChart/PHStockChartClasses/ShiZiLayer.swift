@@ -15,8 +15,8 @@ import UIKit
  - PHShiZiStyleLaZhuTu:  蜡烛图十字线
  */
    enum PHShiZiStyle:Int  {
-    case PHShiZiStyleFenShiTu = 1
-    case PHShiZiStyleLaZhuTu
+    case phShiZiStyleFenShiTu = 1
+    case phShiZiStyleLaZhuTu
 }
 
 
@@ -39,8 +39,8 @@ class ShiZiLayer: CALayer {
         
         self.xValue = x
         self.yValue = y
-        view_size = CGSizeZero
-        shiZiXian = .PHShiZiStyleFenShiTu
+        view_size = CGSize.zero
+        shiZiXian = .phShiZiStyleFenShiTu
         linewidth = 0.4
         
         super.init()
@@ -48,9 +48,9 @@ class ShiZiLayer: CALayer {
 
     
 // MARK: 重绘制图形
-    override func drawInContext(ctx: CGContext) {
+    override func draw(in ctx: CGContext) {
         
-        if shiZiXian == .PHShiZiStyleFenShiTu {
+        if shiZiXian == .phShiZiStyleFenShiTu {
             
             self.styleFenShi(ctx)
         }
@@ -62,7 +62,7 @@ class ShiZiLayer: CALayer {
     
 // MARK: 重绘的具体样式
     
-    func styleFenShi(ctx:CGContextRef) {
+    func styleFenShi(_ ctx:CGContext) {
       
         view_size = self.bounds.size
         
@@ -73,32 +73,32 @@ class ShiZiLayer: CALayer {
         let squareH = (view_size.height - 2 * padding - buttonpadding) / 6
         
         //竖线
-        CGContextMoveToPoint(ctx, xValue, padding + 1);
-        CGContextAddLineToPoint(ctx, xValue, padding);
-        CGContextSetLineWidth(ctx, linewidth);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: padding + 1));
+        ctx.addLine(to: CGPoint(x: xValue, y: padding));
+        ctx.setLineWidth(linewidth);
+        ctx.strokePath();
         
-        CGContextMoveToPoint(ctx, xValue, padding + 1 );
-        CGContextAddLineToPoint(ctx, xValue, padding + 4 * squareH);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: padding + 1));
+        ctx.addLine(to: CGPoint(x: xValue, y: padding + 4 * squareH));
+        ctx.strokePath();
         
-        CGContextMoveToPoint(ctx, xValue, 2 * padding + 4 * squareH);
-        CGContextAddLineToPoint(ctx, xValue, view_size.height - buttonpadding);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: 2 * padding + 4 * squareH));
+        ctx.addLine(to: CGPoint(x: xValue, y: view_size.height - buttonpadding));
+        ctx.strokePath();
         
         let y = padding + (1 - yValue) * 4 * squareH;
         //横线
-        CGContextMoveToPoint(ctx, xValue, y);
-        CGContextAddLineToPoint(ctx, padding, y);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: y));
+        ctx.addLine(to: CGPoint(x: padding, y: y));
+        ctx.strokePath();
         
-        CGContextMoveToPoint(ctx, xValue, y);
-        CGContextAddLineToPoint(ctx, view_size.width - padding , y);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: y));
+        ctx.addLine(to: CGPoint(x: view_size.width - padding, y: y));
+        ctx.strokePath();
 }
     
 
-    func styleLaZhuTu(ctx:CGContextRef) {
+    func styleLaZhuTu(_ ctx:CGContext) {
         
         view_size = self.bounds.size
         
@@ -109,38 +109,40 @@ class ShiZiLayer: CALayer {
         let squareH = (view_size.height - 3 * padding - buttonpadding) / 5
         
         //竖线
-        CGContextMoveToPoint(ctx, xValue, padding + 1);
-        CGContextAddLineToPoint(ctx, xValue, padding);
-        CGContextSetLineWidth(ctx, linewidth);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: padding + 1));
+        ctx.addLine(to: CGPoint(x: xValue, y: padding));
+        ctx.setLineWidth(linewidth);
+        ctx.strokePath();
         
-        CGContextMoveToPoint(ctx, xValue, padding + 1 );
-        CGContextAddLineToPoint(ctx, xValue, padding + 4 * squareH);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: padding + 1));
+        ctx.addLine(to: CGPoint(x: xValue, y: padding + 4 * squareH));
+        ctx.strokePath();
         
-        CGContextMoveToPoint(ctx, xValue, 2 * padding + buttonpadding + 4 * squareH);
-        CGContextAddLineToPoint(ctx, xValue, view_size.height - padding);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: 2 * padding + buttonpadding + 4 * squareH));
+        ctx.addLine(to: CGPoint(x: xValue, y: view_size.height - padding));
+        ctx.strokePath();
         
         let y = padding + (1 - yValue) * 4 * squareH;
         //横线
-        CGContextMoveToPoint(ctx, xValue, y);
-        CGContextAddLineToPoint(ctx, padding, y);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: y));
+        ctx.addLine(to: CGPoint(x: padding, y: y));
+        ctx.strokePath();
         
-        CGContextMoveToPoint(ctx, xValue, y);
-        CGContextAddLineToPoint(ctx, view_size.width - padding , y);
-        CGContextStrokePath(ctx);
+        ctx.move(to: CGPoint(x: xValue, y: y));
+        ctx.addLine(to: CGPoint(x: view_size.width - padding, y: y));
+        ctx.strokePath();
 }
     
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
 }
+   
     
-    
+    func setShiZiLayerStyle(_ style:PHShiZiStyle) {
+      shiZiXian = style
+    }
 
-    
 }
 
 

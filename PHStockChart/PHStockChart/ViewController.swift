@@ -22,20 +22,33 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        gupiaoV = GuPiaoView(withframe: CGRectMake(50, 50, 300, 300), chartStyle: PHChartstyle.PHChartStyleFenShiTu)!
-        gupiaoV?.style = .PHChartStyleFenShiTu
+        gupiaoV = GuPiaoView(withframe: CGRect(x: 0, y: 60, width: 300, height: 200), chartStyle: PHChartstyle.phChartStyleFenShiTu)!
+        gupiaoV?.style = .phChartStyleFenShiTu
         gupiaoV?.isShiZiXianShown = true
         gupiaoV?.isZoomMode = false
         
-        gupiaoV?.subStyle = PHLaZhuTuSubstyle.PHLaZhuTuSubstyleVOL
-        gupiaoV?.backgroundColor = UIColor.whiteColor()
+        gupiaoV?.subStyle = .phLaZhuTuSubstyleVOL
+        gupiaoV?.backgroundColor = UIColor.white
         isFullScreen = false
+
+        if gupiaoV?.style == .phChartStyleFenShiTu {
+           self.settudata()
+        }
+        else
+        {
+         self.settingData()
+        }
         
+        self.view.addSubview(gupiaoV!)
         
-        self.settudata()
-        self.settingData()
-        
-        
+        let label:UILabel = UILabel.init(frame: CGRect(x: 60, y: 300, width: 200, height: 100))
+        label.text = "DOUBLE TAP VIEW TO DISPLAY FULLSCREEN AND RECOVOER,双击视图可以全屏显示或恢复"
+        label.numberOfLines = 4;
+        label.font = UIFont(name: "system", size: 14)
+        let gestureRecog = UITapGestureRecognizer(target: self, action:#selector(ViewController.tapScreen))
+        gestureRecog.numberOfTapsRequired = 2
+        gupiaoV?.addGestureRecognizer(gestureRecog)
+        self.view.addSubview(label)
         
         
 }
@@ -60,16 +73,16 @@ class ViewController: UIViewController {
         isFullScreen = false
         
         self.setNeedsStatusBarAppearanceUpdate()
-        UIView.animateWithDuration(2.0) { 
-            self.gupiaoV?.transform = CGAffineTransformMakeRotation(0)
-            self.gupiaoV!.frame = CGRectMake(0, 80, self.view.frame.size.width, 300)
-        }
+        UIView.animate(withDuration: 2.0, animations: { 
+            self.gupiaoV?.transform = CGAffineTransform(rotationAngle: 0)
+            self.gupiaoV!.frame = CGRect(x: 0, y: 60, width: 300, height: 200)
+        }) 
                 gupiaoV!.setNeedsDisplay()
 }
     
     
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return isFullScreen ? true : false
     }
     
@@ -81,8 +94,9 @@ class ViewController: UIViewController {
         isFullScreen = true
         self.setNeedsStatusBarAppearanceUpdate()
         
+    
         
-        UIView.animateWithDuration(2.0) {
+        UIView.animate(withDuration: 2.0, animations: {
             
             var tempt = self.gupiaoV!.center
             tempt.x = self.view.frame.size.width / 2
@@ -95,14 +109,11 @@ class ViewController: UIViewController {
             self.gupiaoV?.center = tempt
              self.gupiaoV?.bounds = tem
 
-            self.gupiaoV?.transform = CGAffineTransformMakeRotation(pi/2)
+            self.gupiaoV?.transform = CGAffineTransform(rotationAngle: pi/2)
             
-        }
-
-        
+        }) 
         gupiaoV!.setNeedsDisplay()
-
-    }
+}
     
 
     
@@ -110,31 +121,30 @@ class ViewController: UIViewController {
         gupiaoV?.setLabel()
         gupiaoV?.setZuoShouAndZongLiang(3220, zongliang: "97.3万")
         
-        let path1 = NSBundle.mainBundle().pathForResource("dazhexian", ofType: "plist")
+        let path1 = Bundle.main.path(forResource: "dazhexian", ofType: "plist")
         let array1 = NSArray(contentsOfFile: path1!)
-        let path3 = NSBundle.mainBundle().pathForResource("zhutu", ofType: "plist")
+        let path3 = Bundle.main.path(forResource: "zhutu", ofType: "plist")
         let array3 = NSArray(contentsOfFile: path3!)
 
         
         let arr = NSMutableArray()
         for element  in array1! {
             let numtempt =  element as! CGFloat - 40
-            arr.addObject(numtempt)
+            arr.add(numtempt)
         }
         let array2 = arr
         
-        gupiaoV?.setFenShiDaZheAndXiaoZheArray(array1!, xiaozhe: array2)
-        gupiaoV?.setFenShiZhuTuArray(array3!)
+        gupiaoV?.setFenShiDaZheAndXiaoZheArray(array1!, xiaozhe: array2 ,zhutu:array3!)
 
 }
     
     
     func settingData() {
-        let path1 = NSBundle.mainBundle().pathForResource("lazhutu1", ofType: "plist")
+        let path1 = Bundle.main.path(forResource: "lazhutu1", ofType: "plist")
         let array1 = NSArray(contentsOfFile: path1!)
-        let path2 = NSBundle.mainBundle().pathForResource("vol", ofType: "plist")
+        let path2 = Bundle.main.path(forResource: "vol", ofType: "plist")
         let array2 = NSArray(contentsOfFile: path2!)
-        let path3 = NSBundle.mainBundle().pathForResource("macd", ofType: "plist")
+        let path3 = Bundle.main.path(forResource: "macd", ofType: "plist")
         let array3 = NSArray(contentsOfFile: path3!)
         
         gupiaoV?.setLZTarray(array1!)

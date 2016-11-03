@@ -64,7 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				D0904CA31CE2BF5500B58255 /* PHStockChart */,
-				D0904CA21CE2BF5400B58255 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +73,7 @@
 				D0904CA11CE2BF5400B58255 /* PHStockChart.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		D0904CA31CE2BF5500B58255 /* PHStockChart */ = {
@@ -87,6 +87,7 @@
 				D0904CAB1CE2BF5500B58255 /* Assets.xcassets */,
 				D0904CAD1CE2BF5500B58255 /* LaunchScreen.storyboard */,
 				D0904CB01CE2BF5500B58255 /* Info.plist */,
+				D0904CA21CE2BF5400B58255 /* Products */,
 			);
 			path = PHStockChart;
 			sourceTree = "<group>";
@@ -136,6 +137,8 @@
 				TargetAttributes = {
 					D0904CA01CE2BF5400B58255 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = G7LDTLLV6N;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -299,10 +302,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G7LDTLLV6N;
 				INFOPLIST_FILE = PHStockChart/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = peter.PHStockChart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -310,10 +315,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G7LDTLLV6N;
 				INFOPLIST_FILE = PHStockChart/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = peter.PHStockChart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
