@@ -32,13 +32,13 @@ class ViewController: UIViewController {
         isFullScreen = false
 
         
-//根据绘制股票的类型设置数据模型，设置完成后可通过.setNeedsDisplay()  
+//根据绘制股票的类型设置数据模型，设置完成后可通过.setNeedsDisplay()
         if gupiaoV?.style == .phChartStyleFenShiTu {
-           self.settudata()
+           self.setFenshidata()
         }
         else
         {
-         self.settingData()
+         self.setLazhudata()
         }
         
         self.view.addSubview(gupiaoV!)
@@ -117,7 +117,7 @@ class ViewController: UIViewController {
     
 
     
-    func settudata() {
+    func setFenshidata() {
         gupiaoV?.setLabel()
         gupiaoV?.setZuoShouAndZongLiang(3220, zongliang: "97.3万")
         
@@ -139,7 +139,7 @@ class ViewController: UIViewController {
 }
     
     
-    func settingData() {
+    func setLazhudata() {
         let path1 = Bundle.main.path(forResource: "lazhutu1", ofType: "plist")
         let array1 = NSArray(contentsOfFile: path1!)
         let path2 = Bundle.main.path(forResource: "vol", ofType: "plist")
