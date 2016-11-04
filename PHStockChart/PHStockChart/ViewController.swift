@@ -31,6 +31,8 @@ class ViewController: UIViewController {
         gupiaoV?.backgroundColor = UIColor.white
         isFullScreen = false
 
+        
+//根据绘制股票的类型设置数据模型，设置完成后可通过.setNeedsDisplay()  
         if gupiaoV?.style == .phChartStyleFenShiTu {
            self.settudata()
         }
