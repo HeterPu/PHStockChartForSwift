@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
         
         gupiaoV = GuPiaoView(withframe: CGRect(x: 0, y: 60, width: 300, height: 200), chartStyle: PHChartstyle.phChartStyleFenShiTu)!
-        gupiaoV?.style = .phChartStyleFenShiTu
+        gupiaoV?.style = .phChartStyleLaZhuTu
         gupiaoV?.isShiZiXianShown = true
         gupiaoV?.isZoomMode = false
         
@@ -49,8 +49,6 @@ class ViewController: UIViewController {
         gestureRecog.numberOfTapsRequired = 2
         gupiaoV?.addGestureRecognizer(gestureRecog)
         self.view.addSubview(label)
-        
-        
 }
 
 

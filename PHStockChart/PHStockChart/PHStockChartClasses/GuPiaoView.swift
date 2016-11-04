@@ -82,7 +82,7 @@ class GuPiaoView: UIView {
     var subStyle:PHLaZhuTuSubstyle = .phLaZhuTuSubstyleVOL
     
 // MARK: 宏变量
-   
+    
     var VIEW_SIZE:CGSize = CGSize.zero
     var padding:CGFloat = 5
     var buttompadding:CGFloat = 20
@@ -142,14 +142,14 @@ class GuPiaoView: UIView {
     
     var isShiZiXianShown:Bool = false
     var isZoomMode:Bool = false
-    var  shiZiLayer = ShiZiLayer(x: 0, y: 0)!
+    var  shiZiLayer = ShiZiLayer(x: 0, y: 0 ,layer:0)!
     
 // MARK: 初始化方法
     
     init?(withframe frame:CGRect, chartStyle chartstyle: PHChartstyle ) {
         
         style = chartstyle
-
+        shiZiLayer.isHidden = true;
         super.init(frame: frame)
 }
  
@@ -162,7 +162,6 @@ class GuPiaoView: UIView {
      - parameter rect: 尺寸的大小
      */
     override func draw(_ rect: CGRect) {
-       
         if(style == .phChartStyleFenShiTu){
             
             self.setFangKuang()
@@ -282,6 +281,7 @@ class GuPiaoView: UIView {
         
         if (isShiZiXianShown) {
         shiZiLayer.isHidden = true
+        shiZiLayer = ShiZiLayer(x: 0, y: 0, layer: 0)!;
         shiZiLayer.frame = CGRect(x: 0, y: 0, width: VIEW_SIZE.width, height: VIEW_SIZE.height)
         shiZiLayer.shiZiXian = .phShiZiStyleFenShiTu
     }
@@ -731,6 +731,9 @@ class GuPiaoView: UIView {
 // MARK: 分时图绘图
     
     func setFangKuang() {
+        VIEW_SIZE = self.bounds.size
+        squareW = (VIEW_SIZE.width - 2 * padding) / 4
+        squareH = (VIEW_SIZE.height - 2 * padding - buttompadding) / 6
         
         let  ctxSK =  UIGraphicsGetCurrentContext()
         ctxSK?.move(to: CGPoint(x: padding, y: padding));
@@ -822,7 +825,6 @@ class GuPiaoView: UIView {
 // 标签和时间
     
      func setBiaoQian() {
-        //left
         zuigaoL.frame = CGRect(x: padding + 1, y: padding + 1, width: 50, height: 15)
         zuidiL.frame =  CGRect(x: padding + 1, y: padding + 4 * squareH - 15, width: 50, height: 15)
         jyzl.frame =  CGRect(x: padding + 1, y: 2 * padding + 4 * squareH , width: 50, height: 15)
@@ -837,7 +839,10 @@ class GuPiaoView: UIView {
         shijian5.frame = CGRect( x: VIEW_SIZE.width - 56 , y: VIEW_SIZE.height - 20, width: 50, height: 15)
     
             if (self.isShiZiXianShown == true) {
-            shiZiLayer.frame = CGRect(x: 0, y: 0, width: VIEW_SIZE.width, height: VIEW_SIZE.height)
+            shiZiLayer.removeFromSuperlayer()
+            shiZiLayer = ShiZiLayer(x: 0, y: 0, layer: 0)!
+            self.layer .addSublayer(shiZiLayer)
+            shiZiLayer.frame = CGRect(x: 0, y: 0, width: VIEW_SIZE.width , height: VIEW_SIZE.height )
             shiZiLayer.setNeedsDisplay()
     }
 }
@@ -845,7 +850,7 @@ class GuPiaoView: UIView {
     
     
     func setFenShiTu() {
-        //zhexiantianchong
+
         let  dazhexianY =  UIGraphicsGetCurrentContext()
         dazhexianY?.move(to: CGPoint(x: padding, y: padding + 4 * squareH))
         let count1 =  fenShiDaZhe.count
@@ -943,6 +948,9 @@ class GuPiaoView: UIView {
 // MARK: 绘制蜡烛图
     
     func setFangKuang2() {
+        VIEW_SIZE = self.bounds.size
+        squareW = (VIEW_SIZE.width - 2 * padding) / 4
+        squareH1 = (VIEW_SIZE.height - 3 * padding - buttompadding) / 5
         let  ctxSK =  UIGraphicsGetCurrentContext()
         ctxSK?.move(to: CGPoint(x: padding, y: padding))
         ctxSK?.addLine(to: CGPoint(x: VIEW_SIZE.width - padding, y: padding))
@@ -1025,6 +1033,10 @@ class GuPiaoView: UIView {
             ctxrH5?.strokePath()
         }
         if (isShiZiXianShown == true) {
+            shiZiLayer.removeFromSuperlayer()
+            shiZiLayer = ShiZiLayer(x: 0, y: 0, layer: 0)!
+            self.layer .addSublayer(shiZiLayer)
+            shiZiLayer.frame = CGRect(x: 0, y: 0, width: VIEW_SIZE.width , height: VIEW_SIZE.height )
             shiZiLayer.shiZiXian = .phShiZiStyleLaZhuTu
             shiZiLayer.frame = CGRect(x: 0, y: 0, width: VIEW_SIZE.width, height: VIEW_SIZE.height)
             shiZiLayer.setNeedsDisplay()
@@ -1034,6 +1046,7 @@ class GuPiaoView: UIView {
     
     //绘制蜡烛图和M5 M10 和 M20线
     func setLaZhuTu() {
+        VIEW_SIZE = self.bounds.size
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let lazhuCXwidth = lazhuUnitDot * 3
         let count = laZhuTuTransArray.count
@@ -1115,7 +1128,6 @@ class GuPiaoView: UIView {
     
     
     func zhutu2Index(_ index:Int , redOrBlue:Bool, percentage:CGFloat) {
-        
         let lazhuUnitDot = (VIEW_SIZE.width - 2 * padding) / 324
         let lazhuCXwidth = lazhuUnitDot * 3
         

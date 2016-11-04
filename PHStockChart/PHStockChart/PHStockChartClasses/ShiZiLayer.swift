@@ -35,21 +35,23 @@ class ShiZiLayer: CALayer {
     var linewidth:CGFloat
     
     
-    init?(x: CGFloat, y: CGFloat) {
+    init?(x: CGFloat, y: CGFloat, layer:Any) {
         
         self.xValue = x
         self.yValue = y
         view_size = CGSize.zero
         shiZiXian = .phShiZiStyleFenShiTu
         linewidth = 0.4
-        
-        super.init()
+        super.init(layer: layer)
 }
+
 
     
 // MARK: 重绘制图形
     override func draw(in ctx: CGContext) {
-        
+        if ((xValue==0)||(yValue==0)) {
+            return
+        }
         if shiZiXian == .phShiZiStyleFenShiTu {
             
             self.styleFenShi(ctx)
@@ -138,6 +140,7 @@ class ShiZiLayer: CALayer {
         fatalError("init(coder:) has not been implemented")
 }
    
+    
     
     func setShiZiLayerStyle(_ style:PHShiZiStyle) {
       shiZiXian = style
