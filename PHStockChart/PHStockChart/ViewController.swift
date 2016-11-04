@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
         
         gupiaoV = GuPiaoView(withframe: CGRect(x: 0, y: 60, width: 300, height: 200), chartStyle: PHChartstyle.phChartStyleFenShiTu)!
-        gupiaoV?.style = .phChartStyleLaZhuTu
+        gupiaoV?.style = .phChartStyleFenShiTu
         gupiaoV?.isShiZiXianShown = true
         gupiaoV?.isZoomMode = false
         
