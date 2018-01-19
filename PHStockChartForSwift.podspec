@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PHStockChartForSwift"
-  s.version      = "1.0.0"
+  s.version      = "1.1.0"
   s.platform     = :ios, '8.0'
   s.ios.deployment_target = '8.0'
   s.summary      = "A StockChartView on ios,which implement by swift. "

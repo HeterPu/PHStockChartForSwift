@@ -354,7 +354,7 @@ class GuPiaoView: UIView {
         //转换分时图成交量数据
         
         
-        var _max_NUM = zhuData[0][1] as! CGFloat
+        var _max_NUM = zhuData[0].objectAt(1)as! CGFloat
         
         for  element in  zhuData {
             let Element = element as!NSArray
@@ -367,8 +367,8 @@ class GuPiaoView: UIView {
         
         for element in  zhuData  {
             var tempt = Array<AnyObject>()
-            let temptNumber1 = element[0] as! CGFloat
-            let temptNumber2 = element[1] as! CGFloat / _max_NUM
+            let temptNumber1 = element.objectAt(0) as! CGFloat
+            let temptNumber2 = element.objectAt(1) as! CGFloat / _max_NUM
             tempt.append(temptNumber1 as AnyObject)
             tempt.append(temptNumber2 as AnyObject)
             temptarra.append(tempt)
@@ -438,7 +438,7 @@ class GuPiaoView: UIView {
         
         var temptarra = Array<Array<AnyObject>>()
         let volArrayT = volarray as Array<AnyObject>
-        var _max_NUM = volArrayT[0][1] as! CGFloat
+        var _max_NUM = volArrayT[0].objectAt(1) as! CGFloat
             for element in  volarray {
             let Element = element as! NSArray
             let value1 = Element[0] as! CGFloat
@@ -451,8 +451,8 @@ class GuPiaoView: UIView {
             
             
             var tempt = Array<AnyObject>()
-            let temptNumber1 = element[0] as! CGFloat
-            let temptNumber2 = element[1] as! CGFloat / _max_NUM
+            let temptNumber1 = element.objectAt(0)as! CGFloat
+            let temptNumber2 = element.objectAt(1)as! CGFloat / _max_NUM
             tempt.append(temptNumber1 as AnyObject)
             tempt.append(temptNumber2 as AnyObject)
             temptarra.append(tempt)
